@@ -1,4 +1,3 @@
 # pdsaiitm.github.io
-PDSA online textbook
 
-
+Online textbook for the course PDSA
