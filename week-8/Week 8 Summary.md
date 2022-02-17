@@ -77,13 +77,13 @@ def inversionCount(A):
     (B,countB) = mergeAndCount(L,R)
     return(B,countL + countR + countB)
 L = [2,4,3,1,5]
-print(sortAndCount(L))
+print(inversionCount(L)[1])
 ```
 
 **Output**
 
 ```python
-([1, 2, 3, 4, 5], 4) # 4 is the number of inversions
+4 # 4 is the number of inversions
 ```
 
 
