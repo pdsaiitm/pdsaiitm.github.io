@@ -6,6 +6,7 @@
 <link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
 .mac-os-11 { --title-bar-height:28px; }
 html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5 { white-space: pre-wrap; }
 body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
 iframe { margin: auto; }
 a.url { word-break: break-all; }
@@ -22,8 +23,6 @@ body.typora-export { padding-left: 30px; padding-right: 30px; }
 @media screen and (max-width: 500px) {
   body.typora-export { padding-left: 0px; padding-right: 0px; }
   #write { padding-left: 20px; padding-right: 20px; }
-  .CodeMirror-sizer { margin-left: 0px !important; }
-  .CodeMirror-gutters { display: none !important; }
 }
 #write li > figure:last-child { margin-bottom: 0.5rem; }
 #write ol, #write ul { position: relative; }
@@ -51,7 +50,7 @@ sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inh
 #write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
 figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
 figure > table { margin: 0px; }
-tr { break-inside: avoid; break-after: auto; }
+thead, tr { break-inside: avoid; break-after: auto; }
 thead { display: table-header-group; }
 table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
 table.md-table td { min-width: 32px; }
@@ -73,6 +72,7 @@ div.hr:focus { cursor: none; }
 #write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
 .md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
 .CodeMirror-line, twitterwidget { break-inside: avoid; }
+svg { break-inside: avoid; }
 .footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
 .footnotes + .footnotes { margin-top: 0px; }
 .md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
@@ -87,12 +87,14 @@ blockquote > :first-child, li > :first-child { margin-top: 0px; }
 #write .footnote-line { white-space: pre-wrap; }
 @media print {
   body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
-  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  #write { margin-top: 0px; border-color: transparent !important; padding-top: 0px !important; padding-bottom: 0px !important; }
   .typora-export * { -webkit-print-color-adjust: exact; }
   .typora-export #write { break-after: avoid; }
   .typora-export #write::after { height: 0px; }
   .is-mac table { break-inside: avoid; }
+  #write > p:nth-child(1) { margin-top: 0px; }
   .typora-export-show-outline .typora-export-sidebar { display: none; }
+  figure { overflow-x: visible; }
 }
 .footnote-line { margin-top: 0.714em; font-size: 0.7em; }
 a img, img a { cursor: pointer; }
@@ -130,6 +132,7 @@ p > .md-image:only-child { display: inline-block; width: 100%; }
 }
 a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
 .footnote-line a:not(.reversefootnote) { color: inherit; }
+.reversefootnote { font-family: ui-monospace, sans-serif; }
 .md-attr { display: none; }
 .md-fn-count::after { content: "."; }
 code, pre, samp, tt { font-family: var(--monospace); }
@@ -168,7 +171,7 @@ mark .md-meta { color: rgb(0, 0, 0); }
 @media screen and (max-width: 800px) {
   .typora-export-sidebar { display: none; }
 }
-.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; }
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; overflow-wrap: anywhere; }
 .outline-content ul { margin-top: 0px; margin-bottom: 0px; }
 .outline-content strong { font-weight: 400; }
 .outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
@@ -199,6 +202,7 @@ mark .md-meta { color: rgb(0, 0, 0); }
 .typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
 .typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
 .md-inline-math-container mjx-container { zoom: 0.95; }
+mjx-container { break-inside: avoid; }
 
 
 :root {
@@ -457,11 +461,8 @@ code {
     html {
         font-size: 13px;
     }
-    table,
     pre {
         page-break-inside: avoid;
-    }
-    pre {
         word-wrap: break-word;
     }
 }
@@ -590,13 +591,13 @@ header, .context-menu, .megamenu-content, footer{
 
 
 
-</style><title>index</title>
+</style><title>index - Copy</title>
 </head>
 <body class='typora-export os-windows'><div class='typora-export-content'>
 <div id='write'  class=''><p><img src="assets/logo.png" width=30% /></p><hr>
 <span style="display:flex; justify-content: space-between;">
 	<a href="https://pdsaiitm.github.io/">Home</a>    
 </span> 
-<hr> <h1 id='pdsa-using-python'><span>PDSA using Python</span></h1><p><span>This is an online textbook for the course </span><strong><span>P</span></strong><span>rogramming, </span><strong><span>D</span></strong><span>ata </span><strong><span>S</span></strong><span>tructures and </span><strong><span>A</span></strong><span>lgorithms using Python (PDSA).</span></p><p><strong><span>Note to students</span></strong><span>: This book is meant to be used as a reference. You may find content that has not been covered in the video lectures. Likewise, there may be some content that is present in the lectures which is not covered here. Additional content appearing in this book will not be considered for grading. In summary, please refer to chapters that you feel are relevant for the course. But you are under no obligation to read the entire book cover to cover. Interested students are always welcome to read the entire thing!</span></p><p>&nbsp;</p><h2 id='index'><span>INDEX</span></h2><figure><table><thead><tr><th><span>Week</span></th><th><span>Content</span></th><th><span>Summary and Implementations</span></th></tr></thead><tbody><tr><td><span>1</span></td><td><span>Python recap, Why efficiency matters?</span></td><td><a href='https://pdsaiitm.github.io/week-1/summary.html'><span>Open</span></a></td></tr><tr><td><span>2</span></td><td><span>Algorithm analysis: Complexity and Notations, Searching algorithms:- Linear and Binary Search, Sorting algorithms:- Selection, Insertion and Merge Sort</span></td><td><a href='https://pdsaiitm.github.io/week-2/summary.html'><span>Open</span></a></td></tr><tr><td><span>3</span></td><td><span>Quick Sort, Data structures: Python List vs NumPy Array, Linked List, Hashing, Stack, Queue</span></td><td><a href='https://pdsaiitm.github.io/week-3/summary.html'><span>Open</span></a></td></tr><tr><td><span>4</span></td><td><span>Graph algorithms:- Introduction, Graph representation,  BFS, DFS, Topological Sorting, Longest Path in DAG</span></td><td><a href='https://pdsaiitm.github.io/week-4/summary.html'><span>Open</span></a></td></tr><tr><td><span>5</span></td><td><span>Graph algorithms:- Shortest Path:- Dijkstra&#39;s, Bellman Ford and Floyd-Warshall Algorithm, Minimum Spanning Tree:- Prim&#39;s and Kruskal&#39;s Algorithm</span></td><td><a href='https://pdsaiitm.github.io/week-5/summary.html'><span>Open</span></a></td></tr><tr><td><span>6</span></td><td><span>Union-Find Data Structure, Data structures: Tree, Heap, Binary Search Tree</span></td><td><a href='https://pdsaiitm.github.io/week-6/summary.html'><span>Open</span></a></td></tr><tr><td><span>7</span></td><td><span>AVL Tree, Greedy Algorithm</span></td><td><a href='https://pdsaiitm.github.io/week-7/summary.html'><span>Open</span></a></td></tr><tr><td><span>8</span></td><td><span>Divide and Conquer Algorithm</span></td><td><a href='https://pdsaiitm.github.io/week-8/summary.html'><span>Open</span></a></td></tr><tr><td><span>9</span></td><td><span>Dynamic programming</span></td><td><a href='https://pdsaiitm.github.io/week-9/summary.html'><span>Open</span></a></td></tr><tr><td><span>10</span></td><td><span>String or Pattern Matching Algorithm and Regular Expressions</span></td><td><a href='https://pdsaiitm.github.io/week-10/summary.html'><span>Open</span></a></td></tr><tr><td><span>11</span></td><td><span>Complexity classes, Flow network and Linear programming</span></td><td>&nbsp;</td></tr></tbody></table></figure><p>&nbsp;</p><h2 id='learning-strategy-of-pdsa'><span>Learning Strategy Of PDSA</span></h2><p><img src="../assets/index1.png" width=100% /></p><p>&nbsp;</p><p>&nbsp;</p></div></div>
+<hr> <h1 id='pdsa-using-python'><span>PDSA using Python</span></h1><p><span>This is an online textbook for the course </span><strong><span>P</span></strong><span>rogramming, </span><strong><span>D</span></strong><span>ata </span><strong><span>S</span></strong><span>tructures and </span><strong><span>A</span></strong><span>lgorithms using Python (PDSA).</span></p><p><strong><span>Note to students</span></strong><span>: This book is meant to be used as a reference. You may find content that has not been covered in the video lectures. Likewise, there may be some content that is present in the lectures which is not covered here. Additional content appearing in this book will not be considered for grading. In summary, please refer to chapters that you feel are relevant for the course. But you are under no obligation to read the entire book cover to cover. Interested students are always welcome to read the entire thing!</span></p><p>&nbsp;</p><h2 id='index'><span>INDEX</span></h2><figure class='table-figure'><table><thead><tr><th><span>Week</span></th><th><span>Content</span></th><th><span>Summary and Implementations</span></th></tr></thead><tbody><tr><td><span>1</span></td><td><span>Python recap, Why efficiency matters?</span></td><td><a href='https://pdsaiitm.github.io/week-1/summary.html'><span>Open</span></a></td></tr><tr><td><span>2</span></td><td><span>Algorithm analysis: Complexity and Notations, Searching algorithms:- Linear and Binary Search, Sorting algorithms:- Selection, Insertion and Merge Sort</span></td><td><a href='https://pdsaiitm.github.io/week-2/summary.html'><span>Open</span></a></td></tr><tr><td><span>3</span></td><td><span>Quick Sort, Data structures: Python List vs NumPy Array, Linked List, Hashing, Stack, Queue</span></td><td><a href='https://pdsaiitm.github.io/week-3/summary.html'><span>Open</span></a></td></tr><tr><td><span>4</span></td><td><span>Graph algorithms:- Introduction, Graph representation,  BFS, DFS, Topological Sorting, Longest Path in DAG</span></td><td><a href='https://pdsaiitm.github.io/week-4/summary.html'><span>Open</span></a></td></tr><tr><td><span>5</span></td><td><span>Graph algorithms:- Shortest Path:- Dijkstra&#39;s, Bellman Ford and Floyd-Warshall Algorithm, Minimum Spanning Tree:- Prim&#39;s and Kruskal&#39;s Algorithm</span></td><td><a href='https://pdsaiitm.github.io/week-5/summary.html'><span>Open</span></a></td></tr><tr><td><span>6</span></td><td><span>Union-Find Data Structure, Data structures: Tree, Heap, Binary Search Tree</span></td><td><a href='https://pdsaiitm.github.io/week-6/summary.html'><span>Open</span></a></td></tr><tr><td><span>7</span></td><td><span>AVL Tree, Greedy Algorithm</span></td><td><a href='https://pdsaiitm.github.io/week-7/summary.html'><span>Open</span></a></td></tr><tr><td><span>8</span></td><td><span>Divide and Conquer Algorithm</span></td><td><a href='https://pdsaiitm.github.io/week-8/summary.html'><span>Open</span></a></td></tr><tr><td><span>9</span></td><td><span>Dynamic programming</span></td><td><a href='https://pdsaiitm.github.io/week-9/summary.html'><span>Open</span></a></td></tr><tr><td><span>10</span></td><td><span>String or Pattern Matching Algorithm and Regular Expressions</span></td><td><a href='https://pdsaiitm.github.io/week-10/summary.html'><span>Open</span></a></td></tr><tr><td><span>11</span></td><td><span>Complexity classes, Flow network and Linear programming</span></td><td>&nbsp;</td></tr></tbody></table></figure><p>&nbsp;</p><p>&nbsp;</p></div></div>
 </body>
 </html>
