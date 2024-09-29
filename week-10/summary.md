@@ -1,4 +1,14 @@
-# Week 10 - Summary
+<img src="../assets/logo.png" width=30% />
+
+<hr>
+<span style="display:flex; justify-content: space-between;">
+	<a href="https://pdsaiitm.github.io/">Home</a> <a href="../week-11/summary.html">Week-11</a>  <a href=""></a>  
+</span> 
+<hr> 
+
+
+
+# PDSA - Week 12 (As Extra Content)
 
 [TOC]
 
@@ -213,6 +223,52 @@ print(rabinkarp('233323233454323','23'))
 
 
 
+**Rabin Karp Implementation for strings**
+
+```python
+def rabin_karp(text, pattern):
+    match_found =[]
+    n = len(text)
+    m = len(pattern)    
+    # Prime number to use for the hash function
+    prime = 101   
+    # Calculate the hash value of the pattern
+    pattern_hash = 0
+    for i in range(m):
+        pattern_hash += ord(pattern[i])
+    pattern_hash = pattern_hash % prime
+    
+    # Calculate the hash value of the first substring of the text
+    text_hash = 0
+    for i in range(m):
+        text_hash += ord(text[i])
+    text_hash = text_hash % prime
+    # Iterate through the text, checking for matches with the pattern
+    for i in range(n - m + 1):
+        # Check if the current substring matches the pattern
+        if text_hash == pattern_hash and text[i:i+m] == pattern:
+            match_found.append(i)       
+        # Calculate the hash value of the next substring
+        if i < n - m:
+            text_hash = (text_hash - ord(text[i]) + ord(text[i+m]))
+            text_hash = text_hash % prime
+    # No match found
+    return match_found
+text = 'abcdbabcdb'
+pattern = 'abcdb'
+print(rabin_karp(text, pattern))
+```
+
+**Output**
+
+```
+[0, 5]
+```
+
+
+
+
+
 ### Knuth-Morris-Pratt algorithm
 
 * Compute the automaton for `p` efficiently 
@@ -314,6 +370,7 @@ def find_kmp(t, p):
             if k == m - 1:
                 match.append(j - m + 1)
                 k = 0
+                j = j - m + 2
             else:
                 j,k = j+1,k+1
         elif k > 0:
