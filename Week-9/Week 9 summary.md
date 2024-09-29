@@ -1,4 +1,14 @@
-# Week 9 - Summary
+<img src="../assets/logo.png" width=30% />
+
+<hr>
+<span style="display:flex; justify-content: space-between;">
+	<a href="https://pdsaiitm.github.io/">Home</a> <a href="../week-8/summary.html">Week-8</a> <a href="../week-10/summary.html">Week-12</a>    
+</span> 
+<hr> 
+
+
+
+# PDSA - Week 9
 
 [TOC]
 
@@ -150,8 +160,6 @@ print(res3,ft3)
 
     <img src="../assets/w9i6.png" width=75% />
 
-* Complexity is $𝑂(𝑚𝑛)$ using dynamic programming,  $𝑂( 𝑚 + 𝑛)$ using memorization
-
 **Memoization vs dynamic programming**
 
 * Barrier of holes just inside the border 
@@ -162,6 +170,90 @@ print(res3,ft3)
     * “Wasteful” dynamic programming still better in general
 
 <img src="../assets/w9i7.png" width=75% />
+
+
+
+* Complexity is $𝑂(𝑚𝑛)$ using dynamic programming,  $𝑂( 𝑚 + 𝑛)$ using memorization
+
+
+
+**Implementation for Grid Path problem:**
+
+**Simple recursive**
+
+```python
+def grid_rec(x,y,barrier):
+    global count
+    count+=1
+    if x < 1 or y < 1:
+        return 1
+    elif (x,y) in barrier:
+        return 0       
+    else:
+        return grid_rec(x-1,y,barrier) + grid_rec(x,y-1,barrier)
+    
+
+count = 0
+barrier = [(1,9),(2,9),(3,9),(4,9),(4,8),(4,7),(4,6),(4,5),(4,4),(4,3),(4,2),(4,1)]
+print("Total path= ",grid_rec(5,10,barrier))
+print("recursive call count= ",count)
+```
+
+
+
+**Memoization**
+
+```python
+def grid_memo(x,y):
+    global count
+    count+=1
+    if (x,y) in memo_table:
+        return memo_table[(x,y)]
+    else:
+        memo_table[(x,y)] = grid_memo(x-1,y) + grid_memo(x,y-1)
+    return memo_table[(x,y)]
+
+
+count = 0
+memo_table = {}
+for i in range(6):
+    memo_table[(i,0)]=1
+for i in range(11):
+    memo_table[(0,i)]=1
+barrier = [(1,9),(2,9),(3,9),(4,9),(4,8),(4,7),(4,6),(4,5),(4,4),(4,3),(4,2),(4,1)]
+
+for k in barrier:
+    if (k[0],k[1]) not in memo_table.keys():
+        memo_table[(k[0],k[1])] = 0
+print("Total path= ",grid_memo(5,10))
+print("recursive call count= ",count)
+```
+
+
+
+**Dynamic programming**
+
+```python
+import numpy as np
+def grid_tab(x,y,barrier):
+    M = np.zeros((x+1,y+1))
+    for i in range(x+1):
+        for j in range(y+1):
+            if i == 0 or j == 0:
+                M[i,j] = 1
+    for i in range(1,x+1):
+        for j in range(1,y+1):
+            if (i,j) in barrier:
+                M[i,j] = 0
+            else:
+                M[i,j] = M[i-1,j] + M[i,j-1]
+    print (M)
+    return int(M[x,y])
+    
+
+barrier = [(1,9),(2,9),(3,9),(4,9),(4,8),(4,7),(4,6),(4,5),(4,4),(4,3),(4,2),(4,1)]
+print("Total path= ",grid_tab(5,10,barrier))
+```
 
 
 
@@ -230,7 +322,9 @@ print(LCW(s1,s2))
 * Inductive structure
 
 $$
-LCS[i,j]=\begin{cases} 1+LCS[i+1,j+1], ~~~~~if~~a_i=b_j\\ \\max(LCS[i+1,j],lcs[i,j+1]), ~~~~~~if~~a_i \ne b_j \end{cases}
+LCS[i,j]=\begin{cases}
+1+LCS[i+1,j+1], ~~~~~if~~a_i=b_j\\
+\\max(LCS[i+1,j],lcs[i,j+1]), ~~~~~~if~~a_i \ne b_j \end{cases}
 $$
 
 
