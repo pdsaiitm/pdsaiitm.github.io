@@ -1,0 +1,1338 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDSA - Week 2 Summary</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Prism.js CSS for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .content-container {
+            flex: 1;
+            max-width: 80%;
+            margin-left: 10px;
+            margin-right: 100px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+        }
+
+        .right-menu {
+            width: 17%;
+            position: fixed;
+            margin-right: 5px;
+            top: 20px;
+            right: 10px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .right-menu h2 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #1abc9c;
+        }
+
+        .right-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .right-menu ul li {
+            margin-bottom: 10px;
+        }
+
+        .right-menu ul li a {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .right-menu ul li a:hover {
+            color: #1abc9c;
+        }
+
+        h1, h2, h3 {
+            color: #1abc9c;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        pre {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow-x: auto;
+            padding: 15px;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid" style="background-color: rgb(197, 221, 213);">
+            <a class="navbar-brand" href="#">PDSA - Week-4: Graph-Basic Algorithms</a>
+
+            <button class="btn btn-outline-secondary d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#rightMenuCollapse" aria-expanded="false" aria-controls="rightMenuCollapse">
+                Sections
+            </button>
+            
+           
+        </div>
+    </nav>
+
+    <div class="content-container">
+<br>
+<br>
+
+<h2 id="Introduction-to-Graph">Introduction of Graph</h2>
+<p><strong>Graph:-</strong> It is a non-linear data structure. A graph G consist of a non empty set V where members are called the vertices of graph and the set E where member are called the edges.</p>
+<p>G = (V, E)</p>
+<p>V = set of vertices</p>
+<p>E = set of edges </p>
+<p><strong>Example:-</strong> </p>
+<p><img src="../assets/w4i1.png" width=100% /></p>
+<p>G = (V, E)</p>
+<p>V = {A,B,C,D,E}</p>
+<p>E = {e1,e2,e3,e4,e5} or {(A,B), (A,C), (B,C), (C,D), (C,E)}</p>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<h2>Basic Terminology of Graph</h2>
+<p><strong>Vertex (or node):</strong> </p>
+<p>A vertex or node is a fundamental unit in a graph. In a simple graph, each vertex can be connected to other vertices by edges. Vertices are often represented by circles or dots in visual representations of graphs.</p>
+<p>&nbsp;</p>
+<p><strong>Edge:</strong> </p>
+<p>An edge is a line or connection between two vertices in a graph. Edges can be directed or undirected, and weighted or unweighted. In an undirected graph, edges connect vertices without a specified direction, while in a directed graph, edges have a direction, represented by an arrow. In a weighted graph, edges have a numerical weight or value assigned to them.</p>
+<p>&nbsp;</p>
+<p><strong>Degree:</strong> </p>
+<p>The degree of a vertex is the number of edges that are connected to it. In a directed graph, the degree of a vertex is defined as the sum of the in-degree (number of edges coming into the vertex) and out-degree (number of edges going out of the vertex).</p>
+<p>&nbsp;</p>
+<p><strong>Path:</strong> </p>
+<p>A path is a sequence of vertices connected by edges. A simple path is a path where no vertex is repeated.</p>
+<p>&nbsp;</p>
+<p><strong>Cycle:</strong> </p>
+<p>A cycle is a path that starts and ends at the same vertex.</p>
+<p>&nbsp;</p>
+<p><strong>Connectedness:</strong> </p>
+<p>A graph is said to be connected if there is a path between any two vertices in the graph. A disconnected graph is a graph that is not connected, meaning it can be broken into two or more separate components.</p>
+<p>&nbsp;</p>
+<p><strong>Component:</strong> </p>
+<p>A component is a connected subgraph of a larger graph. In other words, it is a part of the graph that is connected to other vertices or edges within that part, but not connected to the rest of the graph.</p>
+<p>&nbsp;</p>
+<p><strong>Directed graph:</strong> </p>
+<p>A directed graph is a graph where edges have a direction, represented by an arrow. In a directed graph, edges are often called arcs.</p>
+<p>&nbsp;</p>
+<p><strong>Undirected graph:</strong> </p>
+<p>An undirected graph is a graph where edges do not have a direction.</p>
+<p>&nbsp;</p>
+<p><strong>Weighted graph:</strong> </p>
+<p>A weighted graph is a graph where edges have weights or values assigned to them.</p>
+<p>&nbsp;</p>
+<p><strong>Adjacent vertices:</strong> </p>
+<p>Two vertices are adjacent if they are connected by an edge.</p>
+<p>&nbsp;</p>
+<p><strong>Incidence:</strong> </p>
+<p>A vertex is incident on an edge if the vertex is one of the endpoints of the edge.</p>
+<p>&nbsp;</p>
+<p><strong>Subgraph:</strong> </p>
+<p>A subgraph is a graph that is a subset of another graph, with some edges and vertices removed.</p>
+<p>&nbsp;</p>
+<p><strong>Complete graph:</strong> </p>
+<p>A complete graph is a graph where every vertex is connected to every other vertex. In other words, there is an edge between every pair of vertices in the graph.</p>
+<p>&nbsp;</p>
+<p><strong>Logical Representation of graph</strong></p>
+<p><img src="../assets/w4i2.png" width=100% /></p>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<h2>Graph Representation in data structure</h2>
+<p><strong>Adjacency matrix:</strong> </p>
+<p>An adjacency matrix is a two-dimensional array or list that represents a graph. The matrix has a row and column for each vertex, and the value at position (i, j) indicates whether there is an edge between vertices i and j. If there is an edge, the value is 1, and if there is no edge, the value is 0. This representation is useful for dense graphs, where the number of edges is close to the maximum possible number of edges. In python we can use NumPy array or python list for adjacency matrix.</p>
+<p>.</p>
+<p><strong>Adjacency list:</strong> </p>
+<p>An adjacency list is a list of lists where each vertex has a list of its adjacent vertices. Each list contains the vertices that are adjacent to the vertex at that index. This representation is useful for sparse graphs, where the number of edges is much smaller than the maximum possible number of edges. In python we can use dictionary for adjacency list.</p>
+<p>&nbsp;</p>
+<h3>For unweighted directed graph</h3>
+<p><img src="../assets/w4i3.png" width=100% /></p>
+<p>&nbsp;</p>
+<p>G = (V, E)</p>
+<p>V = [0,1,2,3,4]</p>
+<p>E = [(0, 1), (0, 2), (1, 3), (1, 4), (2, 4), (2, 3), (3, 4)] </p>
+<p>&nbsp;</p>
+<p><strong>Adjacency matrix representation:</strong></p>
+<p><strong>Using NumPy 2d array</strong></p>
+<pre><code class='language-python' lang='python'>V = [0,1,2,3,4]
+E = [(0, 1), (0, 2), (1, 3), (1, 4), (2, 4), (2, 3), (3, 4)] # each tuple(u,v) represent edge from u to v
+size = len(V)
+import numpy as np
+AMat = np.zeros(shape=(size,size))
+for (i,j) in E:
+    AMat[i,j] = 1 # mark 1 if edge present in graph from i to j , otherwise 0
+print(AMat)
+</code></pre>
+<p><strong>Output adjacency matrix (AMat)</strong> </p>
+<pre><code class='language-python' lang='python'>[[0. 1. 1. 0. 0.]
+    [0. 0. 0. 1. 1.]
+    [0. 0. 0. 1. 1.]
+    [0. 0. 0. 0. 1.]
+    [0. 0. 0. 0. 0.]]
+# AMat[i,j] == 1 represent edge from i to j 
+</code></pre>
+<p>&nbsp;</p>
+<p><strong>Using Python nested list</strong></p>
+<pre><code class='language-python' lang='python'>V = [0,1,2,3,4]
+E = [(0, 1), (0, 2), (1, 3), (1, 4), (2, 4), (2, 3), (3, 4)]
+size = len(V)
+AMat = []
+for i in range(size):
+    row = []
+    for j in range(size):
+        row.append(0)
+    AMat.append(row.copy())       
+for (i,j) in E:
+    AMat[i][j] = 1 # mark 1 if edge present in graph from i to j , otherwise 0
+print(AMat)
+</code></pre>
+<p><strong>Output adjacency matrix (AMat)</strong> </p>
+<pre><code class='language-python' lang='python'>[[0, 1, 1, 0, 0],
+[0, 0, 0, 1, 1],
+[0, 0, 0, 1, 1],
+[0, 0, 0, 0, 1],
+[0, 0, 0, 0, 0]]
+# AMat[i][j] == 1 represent edge from i to j
+</code></pre>
+<p>&nbsp;</p>
+<p><strong>Adjacency list representation:</strong></p>
+<p><strong>Using python dictionary</strong></p>
+<pre><code class='language-python' lang='python'>V = [0,1,2,3,4]
+E = [(0, 1), (0, 2), (1, 3), (1, 4), (2, 4), (2, 3), (3, 4)]
+size = len(V)
+AList = {}
+# In dictionay AList, for example, AList[i] = [j,k] represent two edge from i to j and i to k
+for i in range(size):
+    AList[i] = []
+for (i,j) in E:
+    AList[i].append(j)
+print(AList)
+</code></pre>
+<p><strong>Output adjacency list (AList)</strong> </p>
+<pre><code class='language-python' lang='python'>{0: [1, 2], 1: [3, 4], 2: [4, 3], 3: [4], 4: []}
+# for example, AList[i] = [j,k] represent two edge from i to j and i to k
+</code></pre>
+<p>&nbsp;</p>
+<h3>For unweighted undirected graph</h3>
+<p><img src="../assets/w4i4.png" width=100% /></p>
+<p>G = (V, E)</p>
+<p>V = [0,1,2,3,4]</p>
+<p>E = [(0, 1), (0, 2), (1, 3), (1, 4), (2, 4), (2, 3), (3, 4)] </p>
+<p>&nbsp;</p>
+<p><strong>Adjacency matrix representation:</strong></p>
+<p><strong>Using NumPy 2d array</strong></p>
+<pre><code class='language-python' lang='python'>V = [0,1,2,3,4]
+E = [(0, 1), (0, 2), (1, 3), (1, 4), (2, 4), (2, 3), (3, 4)]
+UE = E + [ (j,i) for (i,j) in E] # each edge represented by two tuple (u,v) and (v,u)
+size = len(V)
+import numpy as np
+AMat = np.zeros(shape=(size,size))
+for (i,j) in UE:
+    AMat[i,j] = 1 # mark 1 if edge present in graph from i to j , otherwise 0
+print(AMat)
+</code></pre>
+<p><strong>Output adjacency matrix (AMat)</strong> </p>
+<pre><code class='language-python' lang='python'>[[0. 1. 1. 0. 0.]
+    [1. 0. 0. 1. 1.]
+    [1. 0. 0. 1. 1.]
+    [0. 1. 1. 0. 1.]
+    [0. 1. 1. 1. 0.]]
+    # AMat[i,j] == 1 represent edge from i to j
+</code></pre>
+<p>&nbsp;</p>
+<p><strong>Using Python nested list</strong></p>
+<pre><code class='language-python' lang='python'>V = [0,1,2,3,4]
+E = [(0, 1), (0, 2), (1, 3), (1, 4), (2, 4), (2, 3), (3, 4)]
+UE = E + [ (j,i) for (i,j) in E] # each edge represented by two tuple (u,v) and (v,u)
+size = len(V)
+AMat = []
+for i in range(size):
+    row = []
+    for j in range(size):
+        row.append(0)
+    AMat.append(row.copy())       
+for (i,j) in UE:
+    AMat[i][j] = 1 # mark 1 if edge present in graph from i to j , otherwise 0
+print(AMat)
+</code></pre>
+<p><strong>Output adjacency matrix (AMat)</strong></p>
+<pre><code class='language-python' lang='python'>[[0, 1, 1, 0, 0], 
+[1, 0, 0, 1, 1], 
+[1, 0, 0, 1, 1], 
+[0, 1, 1, 0, 1], 
+[0, 1, 1, 1, 0]]
+# AMat[i][j] == 1 represent edge from i to j
+</code></pre>
+<p>&nbsp;</p>
+<p><strong>Adjacency list representation:</strong></p>
+<p><strong>Using python dictionary</strong></p>
+<pre><code class='language-python' lang='python'>V = [0,1,2,3,4]
+E = [(0, 1), (0, 2), (1, 3), (1, 4), (2, 4), (2, 3), (3, 4)]
+UE = E + [ (j,i) for (i,j) in E] # each edge represented by two tuple (u,v) and (v,u)
+size = len(V)
+AList = {}
+# In dictionay AList, for example, AList[i] = [j,k] represent two edge from i to j and i to k
+for i in range(size):
+    AList[i] = []
+for (i,j) in UE:
+    AList[i].append(j)
+print(AList)
+</code></pre>
+<p><strong>Output adjacency list (AList)</strong> </p>
+<pre><code class='language-python' lang='python'>{0: [1, 2], 1: [3, 4, 0], 2: [4, 3, 0], 3: [4, 1, 2], 4: [1, 2, 3]}
+# for example, AList[i] = [j,k] represent two edge from i to j and i to k
+</code></pre>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<h2 id="Graph-Traversing-Algorithms">Graph Traversing Algorithm</h2>
+<p>Graph traversal is the process of visiting all the vertices (nodes) of a graph. There are two commonly used algorithms for graph traversal:</p>
+<ol>
+<li>Breadth-First Search (BFS)</li>
+<li>Depth-First Search (DFS)</li>
+
+</ol>
+<p>&nbsp;</p>
+<h3 id="BFS">Breadth First Search(BFS) </h3>
+<p>The Breadth First Search (BFS) algorithm is used to traverse a graph or a tree in a breadth-first manner. BFS starts at the root node and explores all the neighboring nodes at the current depth before moving on to the nodes at the next depth. This is done by using a queue data structure. The algorithm marks each visited node to avoid revisiting it.</p>
+<h4>Algorithm</h4>
+<p> <strong>Here are the steps for the BFS algorithm:</strong></p>
+<ol>
+<li>Choose a starting node and enqueue it to a queue.</li>
+<li>Mark the starting node as visited.</li>
+<li>While the queue is not empty, dequeue a node from the front of the queue.</li>
+<li>For each of the dequeued node&#39;s neighbors that are not visited, mark them as visited and enqueue them to the queue.</li>
+<li>Repeat steps 3-4 until the queue is empty.</li>
+
+</ol>
+<p>To keep track of the traversal order, you can add each visited node to a list as it is dequeued from the queue.</p>
+<p>&nbsp;</p>
+<p>Complexity is <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="6.348ex" height="2.452ex" role="img" focusable="false" viewBox="0 -833.9 2805.9 1083.9" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.566ex;"><defs><path id="MJX-24-TEX-I-1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path><path id="MJX-24-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-24-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path><path id="MJX-24-TEX-N-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path id="MJX-24-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D442" xlink:href="#MJX-24-TEX-I-1D442"></use></g><g data-mml-node="mo" transform="translate(763,0)"><use data-c="28" xlink:href="#MJX-24-TEX-N-28"></use></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-24-TEX-I-1D449"></use></g><g data-mml-node="mn" transform="translate(861.3,363) scale(0.707)"><use data-c="32" xlink:href="#MJX-24-TEX-N-32"></use></g></g><g data-mml-node="mo" transform="translate(2416.9,0)"><use data-c="29" xlink:href="#MJX-24-TEX-N-29"></use></g></g></g></svg></mjx-container><script type="math/tex">O(V^2 )</script> using adjacency matrix, <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="9.72ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 4296.4 1000" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.566ex;"><defs><path id="MJX-28-TEX-I-1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path><path id="MJX-28-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-28-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path><path id="MJX-28-TEX-N-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path><path id="MJX-28-TEX-I-1D438" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"></path><path id="MJX-28-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D442" xlink:href="#MJX-28-TEX-I-1D442"></use></g><g data-mml-node="mo" transform="translate(763,0)"><use data-c="28" xlink:href="#MJX-28-TEX-N-28"></use></g><g data-mml-node="mi" transform="translate(1152,0)"><use data-c="1D449" xlink:href="#MJX-28-TEX-I-1D449"></use></g><g data-mml-node="mo" transform="translate(2143.2,0)"><use data-c="2B" xlink:href="#MJX-28-TEX-N-2B"></use></g><g data-mml-node="mi" transform="translate(3143.4,0)"><use data-c="1D438" xlink:href="#MJX-28-TEX-I-1D438"></use></g><g data-mml-node="mo" transform="translate(3907.4,0)"><use data-c="29" xlink:href="#MJX-28-TEX-N-29"></use></g></g></g></svg></mjx-container><script type="math/tex">O(V + E)</script> using adjacency list, Where <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.74ex" height="1.595ex" role="img" focusable="false" viewBox="0 -683 769 705" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.05ex;"><defs><path id="MJX-29-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-29-TEX-I-1D449"></use></g></g></g></svg></mjx-container><script type="math/tex">V</script> is number of vertices and <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.729ex" height="1.538ex" role="img" focusable="false" viewBox="0 -680 764 680" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: 0px;"><defs><path id="MJX-30-TEX-I-1D438" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D438" xlink:href="#MJX-30-TEX-I-1D438"></use></g></g></g></svg></mjx-container><script type="math/tex">E</script> is number of edges in Graph.</p>
+<p>&nbsp;</p>
+<h4>Working Visualization </h4>
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRGiWxb8ArB2rNAW-dBrA-wtoSQ4z0HvrkQUoHjsBjhCBWHKXQEyt9tlGtrOkDxc5eU9aUH_lLHIKR5/embed?start=false&loop=false&delayms=2000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<p>&nbsp;</p>
+<h4>Implementation BFS for adjacency list of graph</h4>
+<pre><code class='language-python' lang='python'># Queue Implementation
+class Queue:
+    def __init__(self):
+        self.queue = []
+    def enqueue(self,v):
+        self.queue.append(v)
+    def isempty(self):
+        return(self.queue == [])    
+    def dequeue(self):
+        v = None
+        if not self.isempty():
+            v = self.queue[0]
+            self.queue = self.queue[1:]
+        return(v)    
+    def __str__(self):
+        return(str(self.queue))
+
+# BFS Implementation For Adjacency list
+def BFSList(AList,start_vertex):
+    # Initialization
+    visited = {}
+    for each_vertex in AList.keys():
+        visited[each_vertex] = False    
+    
+    # Create Queue object q
+    q = Queue()
+    
+    # Mark the start_vertex visited and insert it into the queue 
+    visited[start_vertex] = True
+    q.enqueue(start_vertex)
+    
+    # Repeat the following until the queue is empty 
+    while(not q.isempty()):
+        # Remove the one vertex from queue
+        curr_vertex = q.dequeue()
+        # Visit each adjacent of the removed vertex (if not visited), mark that visited, and insert it into the queue 
+        for adj_vertex in AList[curr_vertex]:
+            if (not visited[adj_vertex]):
+                visited[adj_vertex] = True
+                q.enqueue(adj_vertex)               
+    return(visited)
+
+AList = {0: [1, 2], 1: [3, 4], 2: [4, 3], 3: [4], 4: []}
+print(BFSList(AList,0))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code class='language-python' lang='python'>{0: True, 1: True, 2: True, 3: True, 4: True}
+</code></pre>
+<p>&nbsp;</p>
+<p><strong>Code Execution Flow</strong></p>
+<div style =" border-style: double;">
+<iframe  width=100%  height="600" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=class%20Queue%3A%0A%20%20%20%20def%20__init__%28self%29%3A%0A%20%20%20%20%20%20%20%20self.queue%20%3D%20%5B%5D%0A%20%20%20%20def%20enqueue%28self,v%29%3A%0A%20%20%20%20%20%20%20%20self.queue.append%28v%29%0A%20%20%20%20def%20isempty%28self%29%3A%0A%20%20%20%20%20%20%20%20return%28self.queue%20%3D%3D%20%5B%5D%29%20%20%20%20%0A%20%20%20%20def%20dequeue%28self%29%3A%0A%20%20%20%20%20%20%20%20v%20%3D%20None%0A%20%20%20%20%20%20%20%20if%20not%20self.isempty%28%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20v%20%3D%20self.queue%5B0%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20self.queue%20%3D%20self.queue%5B1%3A%5D%0A%20%20%20%20%20%20%20%20return%28v%29%20%20%20%20%0A%20%20%20%20def%20__str__%28self%29%3A%0A%20%20%20%20%20%20%20%20return%28str%28self.queue%29%29%0A%0Adef%20BFSList%28AList,start_vertex%29%3A%0A%20%20%20%20visited%20%3D%20%7B%7D%0A%20%20%20%20for%20each_vertex%20in%20AList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20visited%5Beach_vertex%5D%20%3D%20False%0A%20%20%20%20%0A%20%20%20%20q%20%3D%20Queue%28%29%20%20%20%20%0A%20%20%20%20visited%5Bstart_vertex%5D%20%3D%20True%0A%20%20%20%20q.enqueue%28start_vertex%29%0A%20%20%20%20%0A%20%20%20%20while%28not%20q.isempty%28%29%29%3A%0A%20%20%20%20%20%20%20%20curr_vertex%20%3D%20q.dequeue%28%29%0A%20%20%20%20%20%20%20%20for%20adj_vertex%20in%20AList%5Bcurr_vertex%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28not%20visited%5Badj_vertex%5D%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20visited%5Badj_vertex%5D%20%3D%20True%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20q.enqueue%28adj_vertex%29%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20return%28visited%29%0AAList%20%3D%7B0%3A%20%5B1,%202%5D,%201%3A%20%5B3,%204%5D,%202%3A%20%5B4,%203%5D,%203%3A%20%5B4%5D,%204%3A%20%5B%5D%7D%0Aprint%28BFSList%28AList,0%29%29&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+</div>
+<p>&nbsp;</p>
+<h4>Implementation BFS for adjacency matrix of graph</h4>
+<pre><code class='language-python' lang='python'># Queue Implementation
+class Queue:
+    def __init__(self):
+        self.queue = []
+    def enqueue(self,v):
+        self.queue.append(v)
+    def isempty(self):
+        return(self.queue == [])
+    def dequeue(self):
+        v = None
+        if not self.isempty():
+            v = self.queue[0]
+            self.queue = self.queue[1:]
+        return(v)    
+    def __str__(self):
+        return(str(self.queue))
+
+# Function to return list of neighbours or adjacent vertex of vertex i
+def neighbours(AMat,i):
+    nbrs = []
+    (rows,cols) = AMat.shape
+    for j in range(cols):
+        if AMat[i,j] == 1:
+            nbrs.append(j)
+    return(nbrs)
+
+# BFS Implementation For Adjacency matrix
+def BFS(AMat,start_vertex):
+    # Initialization
+    (rows,cols) = AMat.shape
+    visited = {}
+    for each_vertex in range(rows):
+        visited[each_vertex] = False    
+    
+    # Create Queue object q
+    q = Queue()
+    
+    # Mark the start_vertex visited and insert it into the queue 
+    visited[start_vertex] = True
+    q.enqueue(start_vertex)
+    
+    # Repeat the following until the queue is empty 
+    while(not q.isempty()):
+        # Remove the one vertex from queue
+        curr_vertex = q.dequeue()
+        # Visit the each adjacent of removed vertex(if not visited) and insert into the queue
+        for adj_vertex in neighbours(AMat,curr_vertex):
+            if (not visited[adj_vertex]):
+                visited[adj_vertex] = True
+                q.enqueue(adj_vertex)
+                
+    return(visited)
+
+
+V = [0,1,2,3,4]
+E = [(0, 1), (0, 2), (1, 3), (1, 4), (2, 4), (2, 3), (3, 4)] 
+size = len(V)
+import numpy as np
+AMat = np.zeros(shape=(size,size))
+for (i,j) in E:
+    AMat[i,j] = 1
+print(BFS(AMat,0))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code class='language-python' lang='python'>{0: True, 1: True, 2: True, 3: True, 4: True}
+</code></pre>
+<p>&nbsp;</p>
+<p><strong>Code Execution Flow</strong></p>
+<div style =" border-style: double;">
+<iframe  width=100%  height="600" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=class%20Queue%3A%0A%20%20%20%20def%20__init__%28self%29%3A%0A%20%20%20%20%20%20%20%20self.queue%20%3D%20%5B%5D%0A%20%20%20%20def%20enqueue%28self,v%29%3A%0A%20%20%20%20%20%20%20%20self.queue.append%28v%29%0A%20%20%20%20def%20isempty%28self%29%3A%0A%20%20%20%20%20%20%20%20return%28self.queue%20%3D%3D%20%5B%5D%29%0A%20%20%20%20def%20dequeue%28self%29%3A%0A%20%20%20%20%20%20%20%20v%20%3D%20None%0A%20%20%20%20%20%20%20%20if%20not%20self.isempty%28%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20v%20%3D%20self.queue%5B0%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20self.queue%20%3D%20self.queue%5B1%3A%5D%0A%20%20%20%20%20%20%20%20return%28v%29%20%20%20%20%0A%20%20%20%20def%20__str__%28self%29%3A%0A%20%20%20%20%20%20%20%20return%28str%28self.queue%29%29%0A%0Adef%20neighbours%28AMat,i%29%3A%0A%20%20%20%20nbrs%20%3D%20%5B%5D%0A%20%20%20%20%28rows,cols%29%20%3D%20len%28AMat%29,len%28AMat%29%0A%20%20%20%20for%20j%20in%20range%28cols%29%3A%0A%20%20%20%20%20%20%20%20if%20AMat%5Bi%5D%5Bj%5D%20%3D%3D%201%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20nbrs.append%28j%29%0A%20%20%20%20return%28nbrs%29%0A%0Adef%20BFS%28AMat,start_vertex%29%3A%0A%20%20%20%20%28rows,cols%29%20%3D%20len%28AMat%29,len%28AMat%29%0A%20%20%20%20visited%20%3D%20%7B%7D%0A%20%20%20%20for%20each_vertex%20in%20range%28rows%29%3A%0A%20%20%20%20%20%20%20%20visited%5Beach_vertex%5D%20%3D%20False%0A%20%20%20%20%0A%20%20%20%20q%20%3D%20Queue%28%29%20%20%20%0A%20%20%20%20visited%5Bstart_vertex%5D%20%3D%20True%0A%20%20%20%20q.enqueue%28start_vertex%29%0A%20%20%20%20%0A%20%20%20%20while%28not%20q.isempty%28%29%29%3A%0A%20%20%20%20%20%20%20%20curr_vertex%20%3D%20q.dequeue%28%29%0A%20%20%20%20%20%20%20%20for%20adj_vertex%20in%20neighbours%28AMat,curr_vertex%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28not%20visited%5Badj_vertex%5D%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20visited%5Badj_vertex%5D%20%3D%20True%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20q.enqueue%28adj_vertex%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20return%28visited%29%0A%0AV%20%3D%20%5B0,1,2,3,4%5D%0AE%20%3D%20%5B%280,%201%29,%20%280,%202%29,%20%281,%203%29,%20%281,%204%29,%20%282,%204%29,%20%282,%203%29,%20%283,%204%29%5D%20%0Asize%20%3D%20len%28V%29%0AAMat%20%3D%20%5B%5D%0Afor%20i%20in%20range%28size%29%3A%0A%20%20%20%20row%20%3D%20%5B%5D%0A%20%20%20%20for%20j%20in%20range%28size%29%3A%0A%20%20%20%20%20%20%20%20row.append%280%29%0A%20%20%20%20AMat.append%28row.copy%28%29%29%20%20%20%20%20%20%20%0Afor%20%28i,j%29%20in%20E%3A%0A%20%20%20%20AMat%5Bi%5D%5Bj%5D%20%3D%201%0Aprint%28BFS%28AMat,0%29%29&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>Find parent of each vertex using BFS</strong></p>
+<p>Parent information is useful to determine shortest path from vertex v in term of number of edges or vertex in path.</p>
+<pre><code class='language-python' lang='python'># Queue Implementation
+class Queue:
+    def __init__(self):
+        self.queue = []
+    def enqueue(self,v):
+        self.queue.append(v)
+    def isempty(self):
+        return(self.queue == [])
+    def dequeue(self):
+        v = None
+        if not self.isempty():
+            v = self.queue[0]
+            self.queue = self.queue[1:]
+        return(v)    
+    def __str__(self):
+        return(str(self.queue))
+
+# Using BFS approch For Adjacency list, for path, maintaining the parent of each vertex
+# Path can be found by backtracking from destination to source using parent information
+def BFSListPath(AList,start_vertex):
+    # Initialization
+    (visited,parent) = ({},{})
+    for each_vertex in AList.keys():
+        visited[each_vertex] = False
+        parent[each_vertex] = -1   
+    
+    # Create Queue object q
+    q = Queue()
+    
+    # Mark the start_vertex visited and insert it into the queue 
+    visited[start_vertex] = True
+    q.enqueue(start_vertex)
+    
+    # Repeat the following until the queue is empty
+    while(not q.isempty()):
+        # Remove the one vertex from queue
+        curr_vertex = q.dequeue()
+        # Visit the each adjacent of removed vertex(if not visited) and insert into the queue
+        for adj_vertex in AList[curr_vertex]:
+            if (not visited[adj_vertex]):
+                visited[adj_vertex] = True
+                # Assigne the curr_vertex as parent of each unvisited adjacent of curr_vertex
+                parent[adj_vertex] = curr_vertex
+                q.enqueue(adj_vertex)
+                
+    return(visited,parent)
+
+
+AList ={0: [1, 2], 1: [3, 4], 2: [4, 3], 3: [4], 4: []}
+print(BFSListPath(AList,0))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code class='language-python' lang='python'>({0: True, 1: True, 2: True, 3: True, 4: True}, {0: -1, 1: 0, 2: 0, 3: 1, 4: 1})
+</code></pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>Find level number of vertices using BFS</strong></p>
+<p>Maintain level information to record length of the shortest path, in terms of number of edges or vertex.</p>
+<pre><code class='language-python' lang='python'># Queue Implementation
+class Queue:
+    def __init__(self):
+        self.queue = []
+    def enqueue(self,v):
+        self.queue.append(v)
+    def isempty(self):
+        return(self.queue == [])
+    def dequeue(self):
+        v = None
+        if not self.isempty():
+            v = self.queue[0]
+            self.queue = self.queue[1:]
+        return(v)    
+    def __str__(self):
+        return(str(self.queue))
+
+# Using BFS approch For Adjacency list, for path, maintaining the parent of each vertex
+# Using BFS approch maintaing the adjacent level number from source vertrex
+def BFSListPathLevel(AList,v):
+    # Initialization
+    (level,parent) = ({},{})
+    for each_vertex in AList.keys():
+        level[each_vertex] = -1
+        parent[each_vertex] = -1
+    
+    # Create Queue object q
+    q = Queue()
+    
+    # Assigning the level 0 for start_vertex and insert it into the queue
+    level[v] = 0
+    q.enqueue(v)
+    
+    # Repeat the following until the queue is empty
+    while(not q.isempty()):
+        # Remove the one vertex from queue
+        curr_vertex = q.dequeue()
+        # Visit the each adjacent of curr_vertex(if level value is -1) and insert into the queue
+        for adj_vertex in AList[curr_vertex]:
+            if (level[adj_vertex] == -1):
+                # Assign the level value on each adjacent one more than the curr_vertex level
+                level[adj_vertex] = level[curr_vertex] + 1
+                # Assigne the curr_vertex as parent of adjacent vertex of curr_vertex
+                parent[adj_vertex] = curr_vertex
+                q.enqueue(adj_vertex)
+                
+    return(level,parent)
+
+
+AList ={0: [1, 2], 1: [3, 4], 2: [4, 3], 3: [4], 4: []}
+print(BFSListPathLevel(AList,0))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code class='language-python' lang='python'>({0: 0, 1: 1, 2: 1, 3: 2, 4: 2}, {0: -1, 1: 0, 2: 0, 3: 1, 4: 1})
+</code></pre>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<h3 id="DFS">Depth First Search(DFS)</h3>
+<p>The Depth First Search (DFS) algorithm is used to traverse a graph or a tree in a depth-first manner, exploring as far as possible along each branch before backtracking. This is done by using a stack data structure.</p>
+<p>&nbsp;</p>
+<h4>Algorithm</h4>
+<p> <strong>Here are the steps for the Recursive DFS algorithm:</strong></p>
+<ol>
+<li>Choose a starting node and mark it as visited.</li>
+<li>For each unvisited neighbor of the starting node, recursively call the DFS algorithm starting from that neighbor.</li>
+<li>Repeat step 2 for all unvisited neighbors.</li>
+
+</ol>
+<p>&nbsp;</p>
+<p><strong>Here are the steps for DFS using a stack:</strong></p>
+<ol>
+<li><p>Create a stack <code>S</code> and a set <code>visited</code> to keep track of visited nodes.</p>
+</li>
+<li><p>Push the starting node onto the stack <code>S</code>.</p>
+</li>
+<li><p>While <code>S</code> is not empty, pop the top element <code>u</code> from <code>S</code>.</p>
+</li>
+<li><p>If <code>u</code> is not visited, mark it as visited and do the following:</p>
+<ul>
+<li>Perform any processing on the node <code>u</code>.</li>
+<li>Get all unvisited neighbors <code>v</code> of <code>u</code> and push them onto <code>S</code>.</li>
+
+</ul>
+</li>
+<li><p>Repeat steps 3-4 until <code>S</code> is empty.</p>
+</li>
+
+</ol>
+<p>To keep track of the traversal order, you can add each visited node to a list as it is visited. </p>
+<p>&nbsp;</p>
+<p>Complexity is <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="6.348ex" height="2.452ex" role="img" focusable="false" viewBox="0 -833.9 2805.9 1083.9" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.566ex;"><defs><path id="MJX-24-TEX-I-1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path><path id="MJX-24-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-24-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path><path id="MJX-24-TEX-N-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path id="MJX-24-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D442" xlink:href="#MJX-24-TEX-I-1D442"></use></g><g data-mml-node="mo" transform="translate(763,0)"><use data-c="28" xlink:href="#MJX-24-TEX-N-28"></use></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-24-TEX-I-1D449"></use></g><g data-mml-node="mn" transform="translate(861.3,363) scale(0.707)"><use data-c="32" xlink:href="#MJX-24-TEX-N-32"></use></g></g><g data-mml-node="mo" transform="translate(2416.9,0)"><use data-c="29" xlink:href="#MJX-24-TEX-N-29"></use></g></g></g></svg></mjx-container><script type="math/tex">O(V^2 )</script> using adjacency matrix, <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="9.72ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 4296.4 1000" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.566ex;"><defs><path id="MJX-28-TEX-I-1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path><path id="MJX-28-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-28-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path><path id="MJX-28-TEX-N-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path><path id="MJX-28-TEX-I-1D438" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"></path><path id="MJX-28-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D442" xlink:href="#MJX-28-TEX-I-1D442"></use></g><g data-mml-node="mo" transform="translate(763,0)"><use data-c="28" xlink:href="#MJX-28-TEX-N-28"></use></g><g data-mml-node="mi" transform="translate(1152,0)"><use data-c="1D449" xlink:href="#MJX-28-TEX-I-1D449"></use></g><g data-mml-node="mo" transform="translate(2143.2,0)"><use data-c="2B" xlink:href="#MJX-28-TEX-N-2B"></use></g><g data-mml-node="mi" transform="translate(3143.4,0)"><use data-c="1D438" xlink:href="#MJX-28-TEX-I-1D438"></use></g><g data-mml-node="mo" transform="translate(3907.4,0)"><use data-c="29" xlink:href="#MJX-28-TEX-N-29"></use></g></g></g></svg></mjx-container><script type="math/tex">O(V + E)</script> using adjacency list, Where <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.74ex" height="1.595ex" role="img" focusable="false" viewBox="0 -683 769 705" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.05ex;"><defs><path id="MJX-29-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-29-TEX-I-1D449"></use></g></g></g></svg></mjx-container><script type="math/tex">V</script> is number of vertices and <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.729ex" height="1.538ex" role="img" focusable="false" viewBox="0 -680 764 680" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: 0px;"><defs><path id="MJX-30-TEX-I-1D438" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D438" xlink:href="#MJX-30-TEX-I-1D438"></use></g></g></g></svg></mjx-container><script type="math/tex">E</script> is number of edges in Graph.</p>
+<p>&nbsp;</p>
+<h4>Working Visualization </h4>
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRaEuni_EM9-WzZnmE6ZXc7-EJRwUDexiEc3NkvoQ1LYFlpWhWZ7-X1zta2biriU1LPNk45IWvN8B8y/embed?start=false&loop=false&delayms=2000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<p>&nbsp;</p>
+<h4>Implementation of DFS for adjacency list of graph</h4>
+<p><strong>DFS using Stack for adjacency list of graph</strong> </p>
+<pre><code class='language-python' lang='python'># Stack Implementation
+class Stack:
+    def __init__(self):
+        self.stack = []
+    def Push(self,v):
+        self.stack.append(v)
+    def isempty(self):
+        return(self.stack == [])
+    def Pop(self):
+        v = None
+        if not self.isempty():
+            v = self.stack.pop()
+        return(v)    
+    def __str__(self):
+        return(str(self.stack))
+
+# DFS Implementation for Adjacency list
+def DFSList(AList,start_vertex):
+    # Initializaion
+    visited = {}
+    for each_vertex in AList.keys():
+        visited[each_vertex] = False    
+    
+    # Create stack object st
+    st = Stack()
+    
+    # Push start_vertex in to the stack as first vertex
+    st.Push(start_vertex)    
+    
+    # Repeat the following until the stack is empty
+    while(not st.isempty()):
+        # Pop one vertex from stack 
+        current_vertex = st.Pop()
+        # If popped vertex is not visited, marked visited
+        if visited[current_vertex] == False:
+            visited[current_vertex] = True
+            # Push all unvisited adjacent of popped vertex into the stack
+            for adj_veretx in AList[current_vertex]:
+                    if(not visited[adj_veretx]):
+                        st.Push(adj_veretx)    
+    return(visited)
+
+
+AList ={0: [1, 2], 1: [3, 4], 2: [4, 3], 3: [4], 4: []}
+print(DFSList(AList,0))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code class='language-python' lang='python'>{0: True, 1: True, 2: True, 3: True, 4: True}
+</code></pre>
+<p>&nbsp;</p>
+<p><strong>Code Execution Flow</strong></p>
+<div style =" border-style: double;">
+<iframe  width=100%  height="600" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=class%20Stack%3A%0A%20%20%20%20def%20__init__%28self%29%3A%0A%20%20%20%20%20%20%20%20self.stack%20%3D%20%5B%5D%0A%20%20%20%20def%20Push%28self,v%29%3A%0A%20%20%20%20%20%20%20%20self.stack.append%28v%29%0A%20%20%20%20def%20isempty%28self%29%3A%0A%20%20%20%20%20%20%20%20return%28self.stack%20%3D%3D%20%5B%5D%29%0A%20%20%20%20def%20Pop%28self%29%3A%0A%20%20%20%20%20%20%20%20v%20%3D%20None%0A%20%20%20%20%20%20%20%20if%20not%20self.isempty%28%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20v%20%3D%20self.stack.pop%28%29%0A%20%20%20%20%20%20%20%20return%28v%29%20%20%20%20%0A%20%20%20%20def%20__str__%28self%29%3A%0A%20%20%20%20%20%20%20%20return%28str%28self.stack%29%29%0A%0Adef%20DFSList%28AList,start_vertex%29%3A%0A%20%20%20%20visited%20%3D%20%7B%7D%0A%20%20%20%20for%20each_vertex%20in%20AList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20visited%5Beach_vertex%5D%20%3D%20False%0A%20%20%20%20%0A%20%20%20%20st%20%3D%20Stack%28%29%20%20%20%20%0A%20%20%20%20st.Push%28start_vertex%29%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20while%28not%20st.isempty%28%29%29%3A%0A%20%20%20%20%20%20%20%20current_vertex%20%3D%20st.Pop%28%29%0A%20%20%20%20%20%20%20%20if%20visited%5Bcurrent_vertex%5D%20%3D%3D%20False%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20visited%5Bcurrent_vertex%5D%20%3D%20True%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20adj_veretx%20in%20AList%5Bcurrent_vertex%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%28not%20visited%5Badj_veretx%5D%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20st.Push%28adj_veretx%29%20%20%20%20%0A%20%20%20%20return%28visited%29%0A%0AAList%20%3D%7B0%3A%20%5B1,%202%5D,%201%3A%20%5B3,%204%5D,%202%3A%20%5B4,%203%5D,%203%3A%20%5B4%5D,%204%3A%20%5B%5D%7D%0Aprint%28DFSList%28AList,0%29%29&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+</div>
+<p>&nbsp;</p>
+<p><strong>DFS Recursive (without using external stack)</strong> </p>
+<pre><code class='language-python' lang='python'># Initialization Function
+def DFSInitList(AList):
+    (visited,parent) = ({},{})
+    for each_vertex in AList.keys():
+        visited[each_vertex] = False
+        parent[each_vertex] = -1
+    return(visited,parent)
+
+# DFS Recursive Implementation for Adjacency list
+def DFSList(AList,visited,parent,v):
+    # Mark vertex v as visited vertex
+    visited[v] = True
+    # Repeat following for each unvisited adjacent of vertex v
+    for adj_vertex in AList[v]:
+        if (not visited[adj_vertex]):
+            # Assign vertex v as parent of each unvisited adjacent of v 
+            parent[adj_vertex] = v
+            
+            # Recursively call the DFS on unvisited adjacent of v
+            (visited,parent) = DFSList(AList,visited,parent,adj_vertex)
+            
+    return(visited,parent)
+
+
+AList ={0: [1, 2], 1: [3, 4], 2: [4, 3], 3: [4], 4: []}
+v,p = DFSInitList(AList)
+print(DFSList(AList,v,p,0))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code class='language-python' lang='python'>({0: True, 1: True, 2: True, 3: True, 4: True}, {0: -1, 1: 0, 2: 0, 3: 1, 4: 3})
+</code></pre>
+<p>&nbsp;</p>
+<p><strong>Code Execution Flow</strong></p>
+<div style =" border-style: double;">
+<iframe  width=100%  height="600" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=%23%20Initialization%20Function%0Adef%20DFSInitList%28AList%29%3A%0A%20%20%20%20%28visited,parent%29%20%3D%20%28%7B%7D,%7B%7D%29%0A%20%20%20%20for%20each_vertex%20in%20AList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20visited%5Beach_vertex%5D%20%3D%20False%0A%20%20%20%20%20%20%20%20parent%5Beach_vertex%5D%20%3D%20-1%0A%20%20%20%20return%28visited,parent%29%0A%0A%23Recursive%20DFS%0Adef%20DFSList%28AList,visited,parent,v%29%3A%0A%20%20%20%20visited%5Bv%5D%20%3D%20True%0A%20%20%20%20for%20adj_vertex%20in%20AList%5Bv%5D%3A%0A%20%20%20%20%20%20%20%20if%20%28not%20visited%5Badj_vertex%5D%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20parent%5Badj_vertex%5D%20%3D%20v%0A%20%20%20%20%20%20%20%20%20%20%20%20%28visited,parent%29%20%3D%20DFSList%28AList,visited,parent,adj_vertex%29%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20return%28visited,parent%29%0A%0A%0AAList%20%3D%7B0%3A%20%5B1,%202%5D,%201%3A%20%5B3,%204%5D,%202%3A%20%5B4,%203%5D,%203%3A%20%5B4%5D,%204%3A%20%5B%5D%7D%0Av,p%20%3D%20DFSInitList%28AList%29%0Aprint%28DFSList%28AList,v,p,0%29%29&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+</div>
+<p>&nbsp;</p>
+<p><strong>DFS global for adjacency list of graph</strong></p>
+<pre><code class='language-python' lang='python'># Global variable
+(visited,parent) = ({},{})
+
+# Initialization function
+def DFSInitListGlobal(AList):   
+    for each_vertex in AList.keys():
+        visited[each_vertex] = False
+        parent[each_vertex] = -1
+    return
+
+# DFS Recursive Implementation for Adjacency list
+def DFSListGlobal(AList,v):
+    # Mark vertex v as visited vertex
+    visited[v] = True
+    # Repeat following for each unvisited adjacent of vertex v
+    for adj_vertex in AList[v]:
+        if (not visited[adj_vertex]):
+            # Assign vertex v as parent of each unvisited adjacent of v 
+            parent[adj_vertex] = v
+            # Recursively call the DFS on unvisited adjacent of v
+            DFSListGlobal(AList,adj_vertex)                
+    return
+
+
+AList ={0: [1, 2], 1: [3, 4], 2: [4, 3], 3: [4], 4: []}
+DFSInitListGlobal(AList)
+DFSListGlobal(AList,0)
+print(visited,parent)
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code class='language-python' lang='python'>{0: True, 1: True, 2: True, 3: True, 4: True} {0: -1, 1: 0, 2: 0, 3: 1, 4: 3}
+</code></pre>
+<p>&nbsp;</p>
+<h4>Implementation of DFS for adjacency matrix of graph</h4>
+<pre><code class='language-python' lang='python'># Function to return list of neighbours or adjacent vertex of vertex i
+def neighbours(AMat,i):
+    nbrs = []
+    (rows,cols) = AMat.shape
+    for j in range(cols):
+        if AMat[i,j] == 1:
+            nbrs.append(j)
+    return(nbrs)
+
+# Initialization Function
+def DFSInit(AMat):
+    (rows,cols) = AMat.shape
+    (visited,parent) = ({},{})
+    for each_vertex in range(rows):
+        visited[each_vertex] = False
+        parent[each_vertex] = -1
+    return(visited,parent)
+
+# DFS Recursive Implementation for Adjacency matrix
+def DFS(AMat,visited,parent,v):
+    # Mark vertex v as visited vertex
+    visited[v] = True
+    # Repeat following for each unvisited adjacent of vertex v
+    for adj_vertex in neighbours(AMat,v):
+        if (not visited[adj_vertex]):
+            # Assign vertex v as parent of each unvisited adjacent of v 
+            parent[adj_vertex] = v
+            # Recursively call the DFS on unvisited adjacent of v
+            (visited,parent) = DFS(AMat,visited,parent,adj_vertex)
+            
+    return(visited,parent)
+
+
+V = [0,1,2,3,4]
+E = [(0, 1), (0, 2), (1, 3), (1, 4), (2, 4), (2, 3), (3, 4)] 
+size = len(V)
+import numpy as np
+AMat = np.zeros(shape=(size,size))
+for (i,j) in E:
+    AMat[i,j] = 1
+v,p=DFSInit(AMat)
+print(DFS(AMat,v,p,0))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code class='language-python' lang='python'>({0: True, 1: True, 2: True, 3: True, 4: True}, {0: -1, 1: 0, 2: 0, 3: 1, 4: 3})
+</code></pre>
+<p>&nbsp;</p>
+<p><strong>Code Execution Flow</strong></p>
+<div style =" border-style: double;">
+<iframe  width=100%  height="600" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=%23%20Function%20to%20return%20list%20of%20neighbours%20or%20adjacent%20vertex%20of%20vertex%20i%0Adef%20neighbours%28AMat,i%29%3A%0A%20%20%20%20nbrs%20%3D%20%5B%5D%0A%20%20%20%20rows,cols%20%3D%20len%28AMat%29,len%28AMat%29%0A%20%20%20%20for%20j%20in%20range%28cols%29%3A%0A%20%20%20%20%20%20%20%20if%20AMat%5Bi%5D%5Bj%5D%20%3D%3D%201%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20nbrs.append%28j%29%0A%20%20%20%20return%28nbrs%29%0A%0A%23%20Initialization%20Function%0Adef%20DFSInit%28AMat%29%3A%0A%20%20%20%20rows,cols%20%3D%20len%28AMat%29,len%28AMat%29%0A%20%20%20%20%28visited,parent%29%20%3D%20%28%7B%7D,%7B%7D%29%0A%20%20%20%20for%20each_vertex%20in%20range%28rows%29%3A%0A%20%20%20%20%20%20%20%20visited%5Beach_vertex%5D%20%3D%20False%0A%20%20%20%20%20%20%20%20parent%5Beach_vertex%5D%20%3D%20-1%0A%20%20%20%20return%28visited,parent%29%0A%0A%23%20Recursive%20DFS%0Adef%20DFS%28AMat,visited,parent,v%29%3A%0A%20%20%20%20visited%5Bv%5D%20%3D%20True%0A%20%20%20%20for%20adj_vertex%20in%20neighbours%28AMat,v%29%3A%0A%20%20%20%20%20%20%20%20if%20%28not%20visited%5Badj_vertex%5D%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20parent%5Badj_vertex%5D%20%3D%20v%0A%20%20%20%20%20%20%20%20%20%20%20%20%28visited,parent%29%20%3D%20DFS%28AMat,visited,parent,adj_vertex%29%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20return%28visited,parent%29%0A%0A%0AV%20%3D%20%5B0,1,2,3,4%5D%0AE%20%3D%20%5B%280,%201%29,%20%280,%202%29,%20%281,%203%29,%20%281,%204%29,%20%282,%204%29,%20%282,%203%29,%20%283,%204%29%5D%20%0Asize%20%3D%20len%28V%29%0AAMat%20%3D%20%5B%5D%0Afor%20i%20in%20range%28size%29%3A%0A%20%20%20%20row%20%3D%20%5B%5D%0A%20%20%20%20for%20j%20in%20range%28size%29%3A%0A%20%20%20%20%20%20%20%20row.append%280%29%0A%20%20%20%20AMat.append%28row.copy%28%29%29%20%20%20%20%20%20%20%0Afor%20%28i,j%29%20in%20E%3A%0A%20%20%20%20AMat%5Bi%5D%5Bj%5D%20%3D%201%0Av,p%3DDFSInit%28AMat%29%0Aprint%28DFS%28AMat,v,p,0%29%29&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>DFS global for adjacency matrix of graph</strong></p>
+<pre><code class='language-python' lang='python'># Global variables
+(visited,parent) = ({},{})
+
+# Function to return list of neighbours or adjacent vertex of vertex i
+def neighbours(AMat,i):
+    nbrs = []
+    (rows,cols) = AMat.shape
+    for j in range(cols):
+        if AMat[i,j] == 1:
+            nbrs.append(j)
+    return(nbrs)
+
+# Initialization Function
+def DFSInitGlobal(AMat):
+    (rows,cols) = AMat.shape    
+    for each_vertex in range(rows):
+        visited[each_vertex] = False
+        parent[each_vertex] = -1
+    return
+
+# DFS Recursive Implementation for Adjacency matrix
+def DFSGlobal(AMat,v):
+    # Mark vertex v as visited vertex
+    visited[v] = True
+    # Repeat following for each unvisited adjacent of vertex v
+    for adj_vertex in neighbours(AMat,v):
+        if (not visited[adj_vertex]):
+            # Assign vertex v as parent of each unvisited adjacent of v
+            parent[adj_vertex] = v
+            # Recursively call the DFS on unvisited adjacent of v
+            DFSGlobal(AMat,adj_vertex)                
+    return
+
+
+V = [0,1,2,3,4]
+E = [(0, 1), (0, 2), (1, 3), (1, 4), (2, 4), (2, 3), (3, 4)] 
+size = len(V)
+import numpy as np
+AMat = np.zeros(shape=(size,size))
+for (i,j) in E:
+    AMat[i,j] = 1
+DFSInitGlobal(AMat)
+DFSGlobal(AMat,0)
+print(visited,parent)
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code class='language-python' lang='python'>{0: True, 1: True, 2: True, 3: True, 4: True} {0: -1, 1: 0, 2: 0, 3: 1, 4: 3}
+</code></pre>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<h3 id="Application-of-BFS-and-DFS">Application of BFS and DFS</h3>
+<h4>Find Connected Components in graph using BFS</h4>
+<p>The Connected Components in a Graph using BFS algorithm is used to find all the connected components in an undirected graph. </p>
+<h5>Algorithm</h5>
+<p><strong>Here are the steps for the Connected Components in Graph using BFS algorithm:</strong></p>
+<ol>
+<li>Create a queue and an array visited to keep track of the visited nodes in the graph.</li>
+<li>Initialize dictionary component[v] = -1 for each vertex v in the graph</li>
+<li>For each unvisited node <code>u</code> in the graph, perform a BFS traversal starting from <code>u</code> and assign new component id to all the visited nodes as a single connected component in <code>component</code> dictionary.</li>
+<li>Repeat steps 3 until all nodes in the graph are visited.</li>
+<li>Return <code>component</code> dictionary.</li>
+
+</ol>
+<p>&nbsp;</p>
+<p><strong>For given graph</strong></p>
+<p><img src="../assets/w4i5.png" width=100% /></p>
+<p>&nbsp;</p>
+<h5>Implementation of Find Connected Components in graph using BFS</h5>
+<pre><code class='language-python' lang='python'># Queue Implementation
+class Queue:
+    def __init__(self):
+        self.queue = []
+    def enqueue(self,v):
+        self.queue.append(v)
+    def isempty(self):
+        return(self.queue == [])
+    def dequeue(self):
+        v = None
+        if not self.isempty():
+            v = self.queue[0]
+            self.queue = self.queue[1:]
+        return(v)    
+    def __str__(self):
+        return(str(self.queue))
+
+# BFS Implementation for Adjacency list
+def BFSList(AList,start_vertex):
+    visited = {}
+    for each_vertex in AList.keys():
+        visited[each_vertex] = False
+    
+    q = Queue()    
+    visited[start_vertex] = True
+    q.enqueue(start_vertex)
+    
+    while(not q.isempty()):
+        curr_vertex = q.dequeue()
+        for adj_vertex in AList[curr_vertex]:
+            if (not visited[adj_vertex]):
+                visited[adj_vertex] = True
+                q.enqueue(adj_vertex)               
+    return(visited)
+
+# Implementation to find connected components in graph
+def Components(AList):
+    # Initialization of component value -1 for each vertex
+    component = {}
+    for each_vertex in AList.keys():
+        component[each_vertex] = -1   
+    
+    # Initialize compid(represent conntected component id)
+    # Initialize seen(represent number of visited/checked vertices)
+    (compid,seen) = (0,0)
+    
+    # Repeat the following untill seen value is not equal to number of vertex
+    while seen &lt; max(AList.keys()):
+        # Find the min level value vertex among all vertices which are not checked or visited
+        startv = min([i for i in AList.keys() if component[i] == -1])
+        # Call the BFS to check the reachability from startv
+        visited = BFSList(AList,startv)  
+        # Assign compid value to each reachable vertex from startv and increment seen value
+        for vertex in visited.keys():
+            if visited[vertex]:
+                seen = seen + 1
+                component[vertex] = compid
+        
+        # Increment compid by one to check again if any vertex are remaing to visisted 
+        compid = compid + 1  
+    
+    return(component)
+
+
+AList = {0: [1], 1: [2], 2: [0], 3: [4, 6], 4: [3, 7], 5: [3, 7], 6: [5], 7: [4, 8], 8: [5, 9], 9: [8]}
+print(Components(AList))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code class='language-python' lang='python'>{0: 0, 1: 0, 2: 0, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1, 8: 1, 9: 1}
+</code></pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h4>Pre and Post numbering using DFS</h4>
+<p>The Pre and Post numbering using DFS algorithm is used to assign a unique number to each node in a graph during a Depth-First Search (DFS) traversal. </p>
+<h5>Algorithm</h5>
+<p><strong>Here are the steps for the Pre and Post numbering using DFS algorithm:</strong></p>
+<ol>
+<li>Initialize a counter <code>count</code> to 0 and two dictionary <code>pre</code> and <code>post</code> to keep track of the <code>pre</code> and <code>post</code> numbers of the nodes.</li>
+<li>For each unvisited node <code>u</code> in the graph, perform a DFS traversal starting from <code>u</code>.</li>
+<li>During the DFS traversal, visit each unvisited neighbor <code>v</code> of the current node <code>u</code> and recursively perform a DFS traversal starting from <code>v</code>.</li>
+<li>Increment the <code>count</code> and assign it as the <code>pre</code> number of the current node <code>u</code>.</li>
+<li>After all neighbors of the current node <code>u</code> have been visited, increment the <code>count</code> again and assign it as the <code>post</code> number of the current node <code>u</code>.</li>
+<li>Repeat steps 3-5 until all nodes in the graph are visited.</li>
+<li>Return the <code>pre</code> and <code>post</code> arrays.</li>
+
+</ol>
+<p>&nbsp;</p>
+<p><strong>For given graph</strong></p>
+<p><img src="../assets/w4i6.png" width=100% /></p>
+<h5>Implementation of Pre and Post numbering on graph using DFS</h5>
+<pre><code class='language-python' lang='python'># Global variables
+(visited,pre,post) = ({},{},{})
+
+# Initialization
+def DFSInitPrePost(AList):   
+    for each_vertex in AList.keys():
+        visited[each_vertex] = False
+        (pre[each_vertex],post[each_vertex]) = (-1,-1)
+    return
+
+# Implementation of Pre and Post numbering on graph using DFS approch
+def DFSListPrePost(AList,v,count):
+    # Mark veretx v as visited
+    visited[v] = True
+    # Assigned the pre numbering for v when we are traversing the vertex(entering the vertex)
+    pre[v] = count
+    # Increment the count
+    count = count + 1                      
+    # Repeat for each unvisited adjacent of vertex v
+    for adj_vertex in AList[v]:
+        if (not visited[adj_vertex]):
+            # Recursively call the DFSListPrePost on unvisited adjacent of v
+            count = DFSListPrePost(AList,adj_vertex,count)
+    # Assigned the post numbering for v when return back from recusrive call(leaving the vertex)
+    post[v] = count
+    # Increment the count
+    count = count + 1                           
+    
+    return(count)
+
+
+AList = {0: [1, 4],1: [0],2: [],3: [],4: [0, 8, 9],5: [],6: [],7: [],8: [4, 9],9: [8, 4]}
+DFSInitPrePost(AList)
+print(DFSListPrePost(AList,0,0))
+print(visited)
+print(pre)
+print(post)
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code class='language-python' lang='python'>10
+{0: True, 1: True, 2: False, 3: False, 4: True, 5: False, 6: False, 7: False, 8: True, 9: True}
+{0: 0, 1: 1, 2: -1, 3: -1, 4: 3, 5: -1, 6: -1, 7: -1, 8: 4, 9: 5}
+{0: 9, 1: 2, 2: -1, 3: -1, 4: 8, 5: -1, 6: -1, 7: -1, 8: 7, 9: 6}
+</code></pre>
+<p>&nbsp;</p>
+<p><strong>Classifying tree edges in directed graphs using pre and post numbering</strong></p>
+<p><strong>Tree edge/forward edge: </strong> </p>
+<p>Edge (u, v) is tree/forward edge, if Interval <code>[pre(u), post(u)]</code> contains <code>[pre(v), post(v)]</code></p>
+<p>&nbsp;</p>
+<p><strong>Back edge:</strong> </p>
+<p>Edge (u, v) is back edge, if Interval <code>[pre(v), post(v)]</code> contains <code>[pre(u), post(u)]</code></p>
+<p><em>Back edges generate cycles</em></p>
+<p>&nbsp;</p>
+<p><strong>Cross edge:</strong> </p>
+<p>Edge (u, v) is cross edge, if Intervals <code>[pre(u), post(u)]</code> and <code>[pre(v), post(v)]</code> are disjoint</p>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<h2 id="DAG">Directed Acyclic Graph(DAG)</h2>
+<p>A Directed Acyclic Graph(DAG) is a directed graph with no directed cycles. That is, it consists of vertices and edges, with each edge directed from one vertex to another, such that following those directions will never form a closed loop.</p>
+<p>Directed acyclic graphs are a natural way to represent dependencies </p>
+<ul>
+<li><p>Arise in many contexts </p>
+<ul>
+<li>Pre-requisites between courses for completing a degree </li>
+<li>Recipe for cooking </li>
+<li>Construction project</li>
+
+</ul>
+</li>
+<li><p>Problems to be solved on DAG </p>
+<ul>
+<li>Topological sorting </li>
+<li>Longest paths</li>
+
+</ul>
+</li>
+
+</ul>
+<p>&nbsp;</p>
+<h3 id="Topological-Sort">Topological Sort</h3>
+<p>The Topological Sort algorithm is used to sort the nodes of a directed acyclic graph (DAG) in such a way that for every directed edge from node <code>u</code> to node <code>v</code>, node <code>u</code> comes before node <code>v</code> in the sorting order. </p>
+<h4>Algorithm</h4>
+<p><strong>Here are the steps for the Topological Sort algorithm:</strong></p>
+<ol>
+<li>Compute the in-degree of each node in the graph.</li>
+<li>Enqueue all nodes with in-degree 0 to a queue.</li>
+<li>While the queue is not empty, dequeue a node from the front of the queue and add it to the sorted list.</li>
+<li>For each of the dequeued node&#39;s neighbors, decrement their in-degree by 1.</li>
+<li>If any of the dequeued node&#39;s neighbors now have in-degree 0, enqueue them to the queue.</li>
+<li>Repeat steps 3-5 until the queue is empty.</li>
+
+</ol>
+<p>If the graph contains a cycle, the Topological Sort algorithm cannot produce a valid sorting order because it is impossible to order the nodes such that all edges point forward. In this case, the algorithm will terminate with an error or produce an incomplete sorting order.</p>
+<p>To keep track of the sorting order, you can add each dequeued node to a list as it is dequeued from the queue. </p>
+<p>&nbsp;</p>
+<p>Complexity is <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="6.348ex" height="2.452ex" role="img" focusable="false" viewBox="0 -833.9 2805.9 1083.9" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.566ex;"><defs><path id="MJX-24-TEX-I-1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path><path id="MJX-24-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-24-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path><path id="MJX-24-TEX-N-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path id="MJX-24-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D442" xlink:href="#MJX-24-TEX-I-1D442"></use></g><g data-mml-node="mo" transform="translate(763,0)"><use data-c="28" xlink:href="#MJX-24-TEX-N-28"></use></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-24-TEX-I-1D449"></use></g><g data-mml-node="mn" transform="translate(861.3,363) scale(0.707)"><use data-c="32" xlink:href="#MJX-24-TEX-N-32"></use></g></g><g data-mml-node="mo" transform="translate(2416.9,0)"><use data-c="29" xlink:href="#MJX-24-TEX-N-29"></use></g></g></g></svg></mjx-container><script type="math/tex">O(V^2 )</script> using adjacency matrix, <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="9.72ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 4296.4 1000" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.566ex;"><defs><path id="MJX-28-TEX-I-1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path><path id="MJX-28-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-28-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path><path id="MJX-28-TEX-N-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path><path id="MJX-28-TEX-I-1D438" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"></path><path id="MJX-28-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D442" xlink:href="#MJX-28-TEX-I-1D442"></use></g><g data-mml-node="mo" transform="translate(763,0)"><use data-c="28" xlink:href="#MJX-28-TEX-N-28"></use></g><g data-mml-node="mi" transform="translate(1152,0)"><use data-c="1D449" xlink:href="#MJX-28-TEX-I-1D449"></use></g><g data-mml-node="mo" transform="translate(2143.2,0)"><use data-c="2B" xlink:href="#MJX-28-TEX-N-2B"></use></g><g data-mml-node="mi" transform="translate(3143.4,0)"><use data-c="1D438" xlink:href="#MJX-28-TEX-I-1D438"></use></g><g data-mml-node="mo" transform="translate(3907.4,0)"><use data-c="29" xlink:href="#MJX-28-TEX-N-29"></use></g></g></g></svg></mjx-container><script type="math/tex">O(V + E)</script> using adjacency list, Where <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.74ex" height="1.595ex" role="img" focusable="false" viewBox="0 -683 769 705" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.05ex;"><defs><path id="MJX-29-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-29-TEX-I-1D449"></use></g></g></g></svg></mjx-container><script type="math/tex">V</script> is number of vertices and <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.729ex" height="1.538ex" role="img" focusable="false" viewBox="0 -680 764 680" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: 0px;"><defs><path id="MJX-30-TEX-I-1D438" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D438" xlink:href="#MJX-30-TEX-I-1D438"></use></g></g></g></svg></mjx-container><script type="math/tex">E</script> is number of edges in Graph.</p>
+<p>&nbsp;</p>
+<h4>Working Visualization</h4>
+<p><strong>For given graph(DAG)</strong></p>
+<p><img src="../assets/w4i7.png" width=100% /></p>
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQB6ToqK6nqWL6I5eqtuctYrqKCovCjzqgcG1-3cZCGtrUzhfd4rEk1Pf6i-I65wUGrXFKsu-tvD5Em/embed?start=false&loop=false&delayms=2000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<p>&nbsp;</p>
+<h4>Implementation of Topological Sort for Adjacency list</h4>
+<pre><code class='language-python' lang='python'># Implementaion of Queue
+class Queue:
+    def __init__(self):
+        self.queue = []
+    def enqueue(self,v):
+        self.queue.append(v)
+    def isempty(self):
+        return(self.queue == [])
+    def dequeue(self):
+        v = None
+        if not self.isempty():
+            v = self.queue[0]
+            self.queue = self.queue[1:]
+        return(v)    
+    def __str__(self):
+        return(str(self.queue))
+
+# Implementation of Topological sort for Adjacency list
+def toposortlist(AList):
+    # Initialization
+    (indegree,toposortlist) = ({},[])
+    zerodegreeq = Queue()
+    for u in AList.keys():
+        indegree[u] = 0
+    
+    # Compute indegree for each vertex
+    for u in AList.keys():
+        for v in AList[u]:
+            indegree[v] = indegree[v] + 1
+    
+    # Find the vertex with indegree 0 and added into the queue
+    for u in AList.keys():
+        if indegree[u] == 0:
+            zerodegreeq.enqueue(u)
+    
+    # Topological sort Computing process
+    while (not zerodegreeq.isempty()):
+        # Remove one vertex from queue which have zero degree vertices
+        curr_vertex = zerodegreeq.dequeue()       
+        # Store the removed vertex in toposortlist and reduce the indegree by one 
+        toposortlist.append(curr_vertex)
+        indegree[curr_vertex] = indegree[curr_vertex]-1
+        
+        # Repeat for each adjacent of the removed vertex
+        for adj_vertex in AList[curr_vertex]:
+            # Reduce the indegree of each adjacent of the removed vertex by 1
+            indegree[adj_vertex] = indegree[adj_vertex] - 1
+            # If after reducing the degree of adjacent, it becomes zero then insert it into the queue
+            if indegree[adj_vertex] == 0:
+                zerodegreeq.enqueue(adj_vertex)                
+    
+    return(toposortlist)
+
+AList={0: [2, 3, 4], 1: [2, 7], 2: [5], 3: [5, 7], 4: [7], 5: [6], 6: [7], 7: []}
+print(toposortlist(AList))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code class='language-python' lang='python'>[0, 1, 3, 4, 2, 5, 6, 7]
+</code></pre>
+<p>&nbsp;</p>
+<p><strong>Code Execution Flow</strong></p>
+<div style =" border-style: double;">
+<iframe  width=100%  height="600" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=class%20Queue%3A%0A%20%20%20%20def%20__init__%28self%29%3A%0A%20%20%20%20%20%20%20%20self.queue%20%3D%20%5B%5D%0A%20%20%20%20def%20enqueue%28self,v%29%3A%0A%20%20%20%20%20%20%20%20self.queue.append%28v%29%0A%20%20%20%20def%20isempty%28self%29%3A%0A%20%20%20%20%20%20%20%20return%28self.queue%20%3D%3D%20%5B%5D%29%0A%20%20%20%20def%20dequeue%28self%29%3A%0A%20%20%20%20%20%20%20%20v%20%3D%20None%0A%20%20%20%20%20%20%20%20if%20not%20self.isempty%28%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20v%20%3D%20self.queue%5B0%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20self.queue%20%3D%20self.queue%5B1%3A%5D%0A%20%20%20%20%20%20%20%20return%28v%29%20%20%20%20%0A%20%20%20%20def%20__str__%28self%29%3A%0A%20%20%20%20%20%20%20%20return%28str%28self.queue%29%29%0A%0Adef%20toposortlist%28AList%29%3A%0A%20%20%20%20%23Initialization%0A%20%20%20%20%28indegree,toposortlist%29%20%3D%20%28%7B%7D,%5B%5D%29%0A%20%20%20%20zerodegreeq%20%3D%20Queue%28%29%0A%20%20%20%20for%20u%20in%20AList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20indegree%5Bu%5D%20%3D%200%0A%20%20%20%20%0A%20%20%20%20%23Compute%20indegree%20for%20each%20vertex%0A%20%20%20%20for%20u%20in%20AList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20for%20v%20in%20AList%5Bu%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20indegree%5Bv%5D%20%3D%20indegree%5Bv%5D%20%2B%201%0A%20%20%20%20%0A%20%20%20%20%23Find%20the%20vertex%20with%20indegree%200%20and%20added%20into%20the%20queue%0A%20%20%20%20for%20u%20in%20AList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20if%20indegree%5Bu%5D%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20zerodegreeq.enqueue%28u%29%0A%20%20%20%20%0A%20%20%20%20%23%20Topological%20sort%20Computing%20process%0A%20%20%20%20while%20%28not%20zerodegreeq.isempty%28%29%29%3A%0A%20%20%20%20%20%20%20%20curr_vertex%20%3D%20zerodegreeq.dequeue%28%29%0A%20%20%20%20%20%20%20%20toposortlist.append%28curr_vertex%29%0A%20%20%20%20%20%20%20%20indegree%5Bcurr_vertex%5D%20%3D%20indegree%5Bcurr_vertex%5D-1%0A%20%20%20%20%20%20%20%20for%20adj_vertex%20in%20AList%5Bcurr_vertex%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20indegree%5Badj_vertex%5D%20%3D%20indegree%5Badj_vertex%5D%20-%201%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20indegree%5Badj_vertex%5D%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zerodegreeq.enqueue%28adj_vertex%29%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%0A%20%20%20%20return%28toposortlist%29%0A%0AAList%3D%7B0%3A%20%5B2,%203,%204%5D,%201%3A%20%5B2,%207%5D,%202%3A%20%5B5%5D,%203%3A%20%5B5,%207%5D,%204%3A%20%5B7%5D,%205%3A%20%5B6%5D,%206%3A%20%5B7%5D,%207%3A%20%5B%5D%7D%0Aprint%28toposortlist%28AList%29%29&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+</div>
+<p>&nbsp;</p>
+<h4>Implementation of Topological Sort for Adjacency matrix</h4>
+<pre><code class='language-python' lang='python'># Implementation of Topological sort for Adjacency matrix
+def toposort(AMat):
+    #Initialization
+    (rows,cols) = AMat.shape
+    indegree = {}
+    toposortlist = []
+    
+    #Compute indegree for each vertex
+    for c in range(cols):
+        indegree[c] = 0
+        for r in range(rows):
+            if AMat[r,c] == 1:
+                indegree[c] = indegree[c] + 1
+    
+    # Topological sort Computing process
+    for i in range(rows):
+        # Select the min level vertex for removing the graph which has indegree 0
+        j = min([k for k in range(cols) if indegree[k] == 0])
+        # Store the removed vertex j in toposortlist and reduce the indegree by one 
+        toposortlist.append(j)
+        indegree[j] = indegree[j] - 1
+        
+        # Reduce the indegree of each adjacent of the removed vertex j by 1
+        for k in range(cols):
+            if AMat[j,k] == 1:
+                indegree[k] = indegree[k] - 1
+                
+    return(toposortlist)
+
+
+edges=[(0,2),(0,3),(0,4),(1,2),(1,7),(2,5),(3,5),(3,7),(4,7),(5,6),(6,7)]
+size = 8
+import numpy as np
+AMat = np.zeros(shape=(size,size))
+for (i,j) in edges:
+    AMat[i,j] = 1
+print(toposort(AMat))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code class='language-python' lang='python'>[0, 1, 2, 3, 4, 5, 6, 7]
+</code></pre>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<h3 id="Longest-Path-in-DAG">Longest Path in DAG</h3>
+<p>The Longest Path in an unweighted Directed Acyclic Graph (DAG) algorithm is used to find the maximum length path in a DAG. </p>
+<h4>Algorithm</h4>
+<p><strong>Here are the steps for the Longest Path in an Unweighted DAG algorithm:</strong></p>
+<ol>
+<li>Topologically sort the nodes in the graph using the Topological Sort algorithm.</li>
+<li>Initialize a distance array with all nodes set to 0 except the source node, which is set to 0.</li>
+<li>For each node <code>u</code> in the topologically sorted order, iterate through its incoming edges <code>(v, u)</code> and update the distance of node <code>u</code> as <code>max(dist[u], dist[v] + 1)</code>.</li>
+<li>The longest path length will be the maximum value in the distance array.</li>
+
+</ol>
+<p>&nbsp;</p>
+<p>Complexity is <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="9.72ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 4296.4 1000" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.566ex;"><defs><path id="MJX-28-TEX-I-1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path><path id="MJX-28-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-28-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path><path id="MJX-28-TEX-N-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path><path id="MJX-28-TEX-I-1D438" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"></path><path id="MJX-28-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D442" xlink:href="#MJX-28-TEX-I-1D442"></use></g><g data-mml-node="mo" transform="translate(763,0)"><use data-c="28" xlink:href="#MJX-28-TEX-N-28"></use></g><g data-mml-node="mi" transform="translate(1152,0)"><use data-c="1D449" xlink:href="#MJX-28-TEX-I-1D449"></use></g><g data-mml-node="mo" transform="translate(2143.2,0)"><use data-c="2B" xlink:href="#MJX-28-TEX-N-2B"></use></g><g data-mml-node="mi" transform="translate(3143.4,0)"><use data-c="1D438" xlink:href="#MJX-28-TEX-I-1D438"></use></g><g data-mml-node="mo" transform="translate(3907.4,0)"><use data-c="29" xlink:href="#MJX-28-TEX-N-29"></use></g></g></g></svg></mjx-container><script type="math/tex">O(V + E)</script> using adjacency list, Where <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.74ex" height="1.595ex" role="img" focusable="false" viewBox="0 -683 769 705" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.05ex;"><defs><path id="MJX-29-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-29-TEX-I-1D449"></use></g></g></g></svg></mjx-container><script type="math/tex">V</script> is number of vertices and <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.729ex" height="1.538ex" role="img" focusable="false" viewBox="0 -680 764 680" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: 0px;"><defs><path id="MJX-30-TEX-I-1D438" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D438" xlink:href="#MJX-30-TEX-I-1D438"></use></g></g></g></svg></mjx-container><script type="math/tex">E</script> is number of edges in Graph.</p>
+<p>&nbsp;</p>
+<h4>Working Visualization</h4>
+<p><strong>For given graph(DAG)</strong></p>
+<p><img src="../assets/w4i7.png" width=100% /></p>
+<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vSflR6HTN1GQwlFLzaRwuGXI4FsDmfMHyKSmsFrYXEdfzLeIl2_cTNUAQMvqRJhMc7RgwGOYGp5ARtW/embed?start=false&loop=false&delayms=2000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<p>&nbsp;</p>
+<h4>Implementation for Longest Path on DAG</h4>
+<pre><code class='language-python' lang='python'># Implementation of Queue
+class Queue:
+    def __init__(self):
+        self.queue = []
+    def enqueue(self,v):
+        self.queue.append(v)
+    def isempty(self):
+        return(self.queue == [])
+    def dequeue(self):
+        v = None
+        if not self.isempty():
+            v = self.queue[0]
+            self.queue = self.queue[1:]
+        return(v)    
+    def __str__(self):
+        return(str(self.queue))
+
+# Implementation Longest path on DAG for Adjacency list
+def longestpathlist(AList):
+    # Initialization
+    (indegree,lpath) = ({},{})
+    zerodegreeq = Queue()
+    for u in AList.keys():
+        (indegree[u],lpath[u]) = (0,0)
+    
+    # Compute indegree for each vertex
+    for u in AList.keys():
+        for v in AList[u]:
+            indegree[v] = indegree[v] + 1
+
+    # Find the vertex with indegree 0 and added into the queue
+    for u in AList.keys():
+        if indegree[u] == 0:
+            zerodegreeq.enqueue(u)
+            
+    # Longest path computing process            
+    while (not zerodegreeq.isempty()):
+        # Remove one vertex from queue which have zero degree vertices and reduce the indegree by 1
+        curr_vertex = zerodegreeq.dequeue()
+        indegree[curr_vertex] = indegree[curr_vertex] - 1
+        
+        # Repeat for each adjacent of the removed vertex 
+        for adj_vertex in AList[curr_vertex]:
+            # Reduce the indegree of each adjacent of the removed vertex by 1
+            indegree[adj_vertex] = indegree[adj_vertex] - 1
+            # Assign the longest path value for each adjacent of the removed vertex
+            lpath[adj_vertex] = max(lpath[adj_vertex],lpath[curr_vertex]+1)
+            # If after reducing the degree of adjacent, it becomes zero then insert it into the queue
+            if indegree[adj_vertex] == 0:
+                zerodegreeq.enqueue(adj_vertex)
+                
+    return(lpath)
+
+
+AList={0: [2, 3, 4], 1: [2, 7], 2: [5], 3: [5, 7], 4: [7], 5: [6], 6: [7], 7: []}
+print(longestpathlist(AList))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code class='language-python' lang='python'>{0: 0, 1: 0, 2: 1, 3: 1, 4: 1, 5: 2, 6: 3, 7: 4}
+</code></pre>
+<p><strong>Code Execution Flow</strong></p>
+<div style =" border-style: double;">
+<iframe width="100%" height="600" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=class%20Queue%3A%0A%20%20%20%20def%20__init__%28self%29%3A%0A%20%20%20%20%20%20%20%20self.queue%20%3D%20%5B%5D%0A%20%20%20%20def%20enqueue%28self,v%29%3A%0A%20%20%20%20%20%20%20%20self.queue.append%28v%29%0A%20%20%20%20def%20isempty%28self%29%3A%0A%20%20%20%20%20%20%20%20return%28self.queue%20%3D%3D%20%5B%5D%29%0A%20%20%20%20def%20dequeue%28self%29%3A%0A%20%20%20%20%20%20%20%20v%20%3D%20None%0A%20%20%20%20%20%20%20%20if%20not%20self.isempty%28%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20v%20%3D%20self.queue%5B0%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20self.queue%20%3D%20self.queue%5B1%3A%5D%0A%20%20%20%20%20%20%20%20return%28v%29%20%20%20%20%0A%20%20%20%20def%20__str__%28self%29%3A%0A%20%20%20%20%20%20%20%20return%28str%28self.queue%29%29%0A%0Adef%20longestpathlist%28AList%29%3A%0A%20%20%20%20%23Initialization%0A%20%20%20%20%28indegree,lpath%29%20%3D%20%28%7B%7D,%7B%7D%29%0A%20%20%20%20zerodegreeq%20%3D%20Queue%28%29%0A%20%20%20%20for%20u%20in%20AList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20%28indegree%5Bu%5D,lpath%5Bu%5D%29%20%3D%20%280,0%29%0A%20%20%20%20%0A%20%20%20%20%23Compute%20indegree%20for%20each%20vertex%0A%20%20%20%20for%20u%20in%20AList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20for%20v%20in%20AList%5Bu%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20indegree%5Bv%5D%20%3D%20indegree%5Bv%5D%20%2B%201%0A%0A%20%20%20%20%23Find%20the%20vertex%20with%20indegree%200%20and%20added%20into%20the%20queue%0A%20%20%20%20for%20u%20in%20AList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20if%20indegree%5Bu%5D%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20zerodegreeq.enqueue%28u%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20%23Longest%20path%20computing%20process%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20while%20%28not%20zerodegreeq.isempty%28%29%29%3A%0A%20%20%20%20%20%20%20%20curr_vertex%20%3D%20zerodegreeq.dequeue%28%29%0A%20%20%20%20%20%20%20%20indegree%5Bcurr_vertex%5D%20%3D%20indegree%5Bcurr_vertex%5D%20-%201%0A%20%20%20%20%20%20%20%20for%20adj_vertex%20in%20AList%5Bcurr_vertex%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20indegree%5Badj_vertex%5D%20%3D%20indegree%5Badj_vertex%5D%20-%201%0A%20%20%20%20%20%20%20%20%20%20%20%20lpath%5Badj_vertex%5D%20%3D%20max%28lpath%5Badj_vertex%5D,lpath%5Bcurr_vertex%5D%2B1%29%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20indegree%5Badj_vertex%5D%20%3D%3D%200%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20zerodegreeq.enqueue%28adj_vertex%29%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%0A%20%20%20%20return%28lpath%29%0A%0AAList%3D%7B0%3A%20%5B2,%203,%204%5D,%201%3A%20%5B2,%207%5D,%202%3A%20%5B5%5D,%203%3A%20%5B5,%207%5D,%204%3A%20%5B7%5D,%205%3A%20%5B6%5D,%206%3A%20%5B7%5D,%207%3A%20%5B%5D%7D%0Aprint%28longestpathlist%28AList%29%29&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+</div>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<h2>Visualization of graph algorithms using visualgo</h2>
+<p><a href="https://visualgo.net/en/dfsbfs" target="content-frame1" class="btn btn-outline-primary">Open Visualization</a></p>
+<p>Select the BFS/DFS/Topological sort algorithm from left menu to visualize the working.</p>
+<figure class="video_container">
+    <iframe name="content-frame1"  width=100%  src="" frameborder="0"  height="700px" allowfullscreen="true"> </iframe>
+</figure>
+<p>Source - <a href='https://visualgo.net/en/dfsbfs' target='_blank' class='url'>https://visualgo.net/en/dfsbfs</a></p>
+<hr />
+<p>&nbsp;</p>
+
+
+
+
+
+
+
+        
+
+</div>
+    <div class="col-lg-3 collapse right-menu d-lg-block" id="rightMenuCollapse" >
+        <h2>Topics</h2>
+        <ul>
+            <li><a href="#Introduction-to-Graph">Introduction to Graph</a></li>
+            <li><a href="#Graph-Traversing-Algorithms">Graph Traversing Algorithms</a></li>
+            <li><a href="#BFS">BFS</a></li>
+            <li><a href="#DFS">DFS</a></li>
+            <li><a href="#Application-of-BFS-and-DFS">Application of BFS and DFS</a></li>
+            <li><a href="#DAG">DAG</a></li>
+            <li><a href="#Topological-Sort">Topological Sort</a></li>
+            <li><a href="#Longest-Path-in-DAG">Longest Path in DAG</a></li>
+
+        </ul>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Prism.js JS for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</body>
+
+</html>
