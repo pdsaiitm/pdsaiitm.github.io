@@ -1,0 +1,465 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDSA - Week 1 Summary</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Prism.js CSS for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .content-container {
+            flex: 1;
+            max-width: 80%;
+            margin-left: 10px;
+            margin-right: 100px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+        }
+
+        .right-menu {
+            width: 17%;
+            position: fixed;
+            margin-right: 5px;
+            top: 20px;
+            right: 10px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .right-menu h2 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #1abc9c;
+        }
+
+        .right-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .right-menu ul li {
+            margin-bottom: 10px;
+        }
+
+        .right-menu ul li a {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .right-menu ul li a:hover {
+            color: #1abc9c;
+        }
+
+        h1, h2, h3 {
+            color: #1abc9c;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        pre {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow-x: auto;
+            padding: 15px;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid" style="background-color: rgb(197, 221, 213);">
+            <a class="navbar-brand" href="#">PDSA - Week-1: Python Basics and Efficiency</a>
+
+            <button class="btn btn-outline-secondary d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#rightMenuCollapse" aria-expanded="false" aria-controls="rightMenuCollapse">
+                Sections
+            </button>
+            
+           
+        </div>
+    </nav>
+
+    <div class="content-container">
+        <hr>
+        <!-- Inserted content from uploaded file goes here -->
+        <h2 id="for-python">For Python</h2>
+        <p><a href="https://pypod.github.io/" target="_blank" class="btn btn-outline-primary">Visit Python Docs</a></p>
+
+        <h2 id="number-of-operation-or-instruction-when-program-runs" >Number of operation or instruction when program runs</h2>
+<p><strong>Observe the number of operation or instruction executed when program runs for any input. </strong></p>
+<pre><code class='language-python' lang='python'>def total(a,b):
+    s = a + b
+    return s
+</code></pre>
+<pre><code class='language-python' lang='python'>n = int(input())
+s = 0
+for i in range(n):
+    s = s + i
+print(s)
+</code></pre>
+<pre><code class='language-python' lang='python'>def total(n):
+  s = 0
+  for i in range(n):
+    for j in range(n):
+      s = s + 1
+  return s
+</code></pre>
+<p><strong>Identify the relationship between number of instructions and input size</strong>.</p>
+<p><strong>Our Goal - Want to reduce these numbers of instructions when program runs </strong></p>
+<p>&nbsp;</p>
+<h2 id="computing-gcd" >Computing <code>gcd</code></h2>
+<ul>
+<li><p><strong><code>gcd(m, n)</code> — greatest common divisor</strong> </p>
+<ul>
+<li>Largest k that divides both m and n </li>
+<li><code>gcd(8, 12)</code> = 4</li>
+<li><code>gcd(18, 25)</code> = 1</li>
+
+</ul>
+</li>
+<li><p><strong>Also <code>hcf</code> — highest common factor</strong> </p>
+<ul>
+<li><code>gcd(m, n)</code> always exists </li>
+<li>1 divides both m and n </li>
+
+</ul>
+</li>
+<li><p><strong>Computing <code>gcd(m, n)</code></strong> </p>
+<ul>
+<li><code>gcd(m, n) ≤ min(m, n)</code></li>
+<li>Compute list of common factors from 1 to <code>min(m, n)</code></li>
+<li>Return the last such common factor</li>
+
+</ul>
+</li>
+
+</ul>
+<pre><code class='language-python' lang='python'>def gcd(m,n):
+	cf = [] # List of common factors
+	for i in range(1,min(m,n)+1):
+		if (m%i) == 0 and (n%i) == 0:
+			cf.append(i)
+	return(cf[-1])
+</code></pre>
+<h3>Computing <code>gcd</code> - Eliminate the list</h3>
+<pre><code class='language-python' lang='python'>def gcd(m,n):
+	for i in range(1,min(m,n)+1):
+		if (m%i) == 0 and (n%i) == 0:
+			mrcf = i
+	return(mrcf)
+</code></pre>
+<p><strong>Efficiency</strong> :- Both versions of <code>gcd</code> take time proportional to <code>min(m, n)</code></p>
+<h3>Computing <code>gcd</code> - Better Way</h3>
+<ul>
+<li>Suppose d divides m and n </li>
+<li>m = ad, n = bd </li>
+<li>m − n = (a − b)d </li>
+<li>d also divides m − n</li>
+
+</ul>
+<pre><code class='language-python' lang='python'>def gcd(m,n):
+	(a,b) = (max(m,n), min(m,n))
+	if a%b == 0:
+		return(b)
+	else
+		return(gcd(b,a-b))
+</code></pre>
+<p>Still not efficient, for example <code>gcd(1,1000)</code> takes 1000 steps.</p>
+<h3>Computing <code>gcd</code> - Euclid’s algorithm</h3>
+<ul>
+<li>If n divides m, gcd(m, n) = n </li>
+<li>Otherwise, compute gcd(n, m mod n)</li>
+
+</ul>
+<pre><code class='language-python' lang='python'>def gcd(m,n):
+	(a,b) = (max(m,n), min(m,n))
+	if a%b == 0:
+		return(b)
+	else
+		return(gcd(b,a%b))
+</code></pre>
+<p>Can show that this takes time proportional to number of digits in <code>max(m, n)</code></p>
+<p>&nbsp;</p>
+<h2 id="computing-prime">Computing <code>Prime</code></h2>
+<ul>
+<li>A prime number n has exactly two factors, 1 and n </li>
+<li>Note that 1 is not a prime </li>
+<li>Compute the list of factors of n </li>
+<li>n is a prime if the list of factors is precisely <code>[1,n]</code></li>
+
+</ul>
+<pre><code class='language-python' lang='python'>def factors(n):
+	fl = [] # factor list
+	for i in range(1,n+1):
+		if (n%i) == 0:
+			fl.append(i)
+	return(fl)
+def prime(n):
+	return(factors(n) == [1,n])
+</code></pre>
+<p><strong>Counting primes</strong></p>
+<pre><code class='language-python' lang='python'>def primesupto(m):
+	pl = [] # prime list
+	for i in range(1,m+1):
+		if prime(i):
+			pl.append(i)
+	return(pl)
+</code></pre>
+<h3>Computing Primes- Other approach</h3>
+<ul>
+<li><strong>Directly check if n has a factor between 2 and n − 1</strong></li>
+
+</ul>
+<pre><code class='language-python' lang='python'>def prime(n):
+	result = True
+	for i in range(2,n):
+		if (n%i) == 0:
+			result = False
+	return(result)
+</code></pre>
+<ul>
+<li><strong>Directly check if n has a factor between 2 and n//2</strong></li>
+
+</ul>
+<pre><code class='language-python' lang='python'>def prime(n):
+	result = True
+	for i in range(2,n//2):
+		if (n%i) == 0:
+			result = False
+	return(result)
+</code></pre>
+<ul>
+<li><strong>Terminate after we find first factor</strong></li>
+
+</ul>
+<pre><code class='language-python' lang='python'>def prime(n):
+	result = True
+	for i in range(2,n):
+		if (n%i) == 0:
+			result = False
+			break # Abort loop
+return(result)
+</code></pre>
+<h3>Computing Primes- Sufficient to check factors up to √ n</h3>
+<pre><code class='language-python' lang='python'>import math
+def prime(n):
+	(result,i) = (True,2)
+	while (result and (i &lt;= math.sqrt(n))):
+		if (n%i) == 0:
+			result = False
+		i = i+1
+	return(result)
+</code></pre>
+<p>&nbsp;</p>
+<h2 id="exception-handling">Exception handling</h2>
+<p><strong>Our code could generate many types of errors</strong></p>
+<ul>
+<li>y = x/z, but z has value 0 </li>
+<li>y = int(s), but string s does not represent a valid integer </li>
+<li>y = 5*x, but x does not have a value </li>
+<li>y = l[i], but i is not a valid index for list l </li>
+<li>Try to read from a file, but the file does not exist </li>
+<li>Try to write to a file, but the disk is full</li>
+
+</ul>
+<p><strong>Types of some common errors</strong></p>
+<ul>
+<li><code>SyntaxError: invalid syntax</code></li>
+<li>Name used before value is defined - <code>NameError: name ’x’ is not defined</code></li>
+<li>Division by zero in arithmetic expression - <code>ZeroDivisionError: division by zero</code></li>
+<li>Invalid list index <code>IndexError: list assignment index out of range</code></li>
+
+</ul>
+<p><strong>Handling exceptions</strong></p>
+<pre><code class='language-python' lang='python'>try:
+    #... ← Code where error may occur
+except (IndexError):
+    #... ← Handle IndexError 
+except (NameError,KeyError):
+    #... ← Handle multiple exception types 
+except:
+    #... ← Handle all other exceptions 
+else:
+    #... ← Execute if try runs without errors
+</code></pre>
+<p>&nbsp;</p>
+<h2 id = "classes-and-objects" >Classes and objects</h2>
+<p><strong>Abstract datatype</strong> </p>
+<ul>
+<li>Stores some information </li>
+<li>Designated functions to manipulate the information </li>
+<li>For instance, stack: last-in, first-out, push(), pop()  </li>
+<li>Separate the (private) implementation from the (public) specification</li>
+
+</ul>
+<p><strong>Class</strong></p>
+<ul>
+<li>Template for a data type </li>
+<li>How data is stored </li>
+<li>How public functions manipulate data</li>
+
+</ul>
+<p><strong>Object</strong></p>
+<ul>
+<li>Concrete instance of template</li>
+
+</ul>
+<p><strong>Example</strong></p>
+<pre><code class='language-python' lang='python'>class Point:
+  def __init__(self,a=0,b=0):
+    self.x = a
+    self.y = b
+
+  def translate(self,deltax,deltay):
+    self.x += deltax
+    self.y += deltay
+
+  def odistance(self):
+    import math
+    d = math.sqrt(self.x*self.x +
+                  self.y*self.y)
+    return(d)
+
+  def __str__(self):
+    return(&#39;(&#39;+str(self.x)+&#39;,&#39;
+            +str(self.y)+&#39;)&#39;)
+
+  def __add__(self,p):
+    return(Point(self.x + p.x, 
+                 self.y + p.y))
+
+p = Point(3,4)
+q = Point(5,8)
+print(p)
+print(p+q)
+</code></pre>
+<p>Output</p>
+<pre><code>(3,4)
+(8,12)
+</code></pre>
+<p>&nbsp;</p>
+<h2>Timer</h2>
+<pre><code class='language-python' lang='python'>import time
+
+class TimerError(Exception):
+    &quot;&quot;&quot;A custom exception used to report errors in use of Timer class&quot;&quot;&quot;
+
+class Timer:
+    def __init__(self):
+        self._start_time = None
+        self._elapsed_time = None
+
+    def start(self):
+        &quot;&quot;&quot;Start a new timer&quot;&quot;&quot;
+        if self._start_time is not None:
+            raise TimerError(&quot;Timer is running. Use .stop()&quot;)
+        self._start_time = time.perf_counter()
+
+    def stop(self):
+        &quot;&quot;&quot;Save the elapsed time and re-initialize timer&quot;&quot;&quot;
+        if self._start_time is None:
+           raise TimerError(&quot;Timer is not running. Use .start()&quot;)
+        self._elapsed_time = time.perf_counter() - self._start_time
+        self._start_time = None
+
+    def elapsed(self):
+        &quot;&quot;&quot;Report elapsed time&quot;&quot;&quot;
+        if self._elapsed_time is None:
+           raise TimerError(&quot;Timer has not been run yet. Use .start()&quot;)
+        return(self_elapsed_time)
+
+    def __str__(self):
+        &quot;&quot;&quot;print() prints elapsed time&quot;&quot;&quot;
+        return(str(self._elapsed_time))
+</code></pre>
+<p><strong>Set recursion limit</strong></p>
+<pre><code class='language-python' lang='python'>import sys
+sys.setrecursionlimit(100000)
+gcd(2,99999)
+</code></pre>
+<p><strong>Calculate time for large value</strong></p>
+<pre><code class='language-python' lang='python'># 10^16
+t.start()
+print(678912345678912345,987654321987654321,gcd(678912345678912345,987654321987654321))
+t.stop()
+print(t)
+</code></pre>
+<h2 id = "why-efficiency">Why Efficiency?</h2>
+<p>Example- </p>
+<ul>
+<li>Sort all Aadhaar number</li>
+<li>Search data from big database</li>
+<li>Real time Gamming Problem</li>
+
+</ul>
+
+
+    <div class="col-lg-3 collapse right-menu d-lg-block" id="rightMenuCollapse" >
+        <h2>Topics</h2>
+        <ul>
+            <li><a href="#for-python">For Python</a></li>
+            <li><a href="#number-of-operation-or-instruction-when-program-runs">Number of Operations</a></li>
+            <li><a href="#computing-gcd">Computing GCD</a></li>
+            <li><a href="#computing-prime">Computing Prime</a></li>
+            <li><a href="#exception-handling">Computing GCD</a></li>
+            <li><a href="#classes-and-objects">Classes and Objects</a></li>
+            <li><a href="#why-efficiency">Why Efficiency?</a></li>
+
+        </ul>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Prism.js JS for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</body>
+
+</html>
