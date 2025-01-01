@@ -86,7 +86,7 @@
             transition: all 0.3s ease-in-out;
         }
 
-        .side-menu ul li a:hover {
+        .side-menu ul li a:hover, .side-menu ul li a.selected  {
             background-color: #1abc9c;
             color: white;
             transform: translateX(5px);
@@ -185,7 +185,38 @@
             const sideMenu = document.getElementById('sideMenu');
             sideMenu.classList.toggle('open');
         }
-    </script>
+   // Highlight the selected link
+   const links = document.querySelectorAll('.side-menu ul li a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                links.forEach(l => l.classList.remove('selected'));
+                link.classList.add('selected');
+            });
+        });
+
+        
+        
+        function toggleMenu() {
+        const sideMenu = document.getElementById('sideMenu');
+        sideMenu.classList.toggle('open');
+    }
+
+    // Highlight the selected link and close the menu on click
+   
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            // Remove the 'selected' class from all links
+            links.forEach(l => l.classList.remove('selected'));
+            // Add the 'selected' class to the clicked link
+            link.classList.add('selected');
+
+            // Close the menu if it is open (mobile view)
+            const sideMenu = document.getElementById('sideMenu');
+            if (sideMenu.classList.contains('open')) {
+                sideMenu.classList.remove('open');
+            }
+        });
+    });
 
 
 
