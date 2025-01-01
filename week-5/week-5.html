@@ -1,0 +1,820 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDSA - Week 2 Summary</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Prism.js CSS for Syntax Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .content-container {
+            flex: 1;
+            max-width: 80%;
+            margin-left: 10px;
+            margin-right: 100px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+        }
+
+        .right-menu {
+            width: 17%;
+            position: fixed;
+            margin-right: 5px;
+            top: 20px;
+            right: 10px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .right-menu h2 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #1abc9c;
+        }
+
+        .right-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .right-menu ul li {
+            margin-bottom: 10px;
+        }
+
+        .right-menu ul li a {
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .right-menu ul li a:hover {
+            color: #1abc9c;
+        }
+
+        h1, h2, h3 {
+            color: #1abc9c;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        pre {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow-x: auto;
+            padding: 15px;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container-fluid" style="background-color: rgb(197, 221, 213);">
+            <a class="navbar-brand" href="#">PDSA - Week-5: Graph-Advance Algorithms</a>
+
+            <button class="btn btn-outline-secondary d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#rightMenuCollapse" aria-expanded="false" aria-controls="rightMenuCollapse">
+                Sections
+            </button>
+            
+           
+        </div>
+    </nav>
+
+    <div class="content-container">
+        <br>
+        <br>
+        
+
+
+<h2 id="Weighted-Graph">Weighted Graph</h2>
+<h3>Weighted directed graph </h3>
+<h4>Adjacency matrix representation in Python</h4>
+<pre><code class='language-python' lang='python'># Each tuple (u,v,d) in list is representing the edge from u to v with weight d
+dedges = [(0,1,10),(0,2,80),(1,2,6),(1,4,20),(2,3,70),(4,5,50),(4,6,5),(5,6,10)]
+size = 7
+import numpy as np
+W = np.zeros(shape=(size,size,2))
+for (i,j,w) in dedges:
+    W[i,j,0] = 1
+    W[i,j,1] = w
+print(W)
+</code></pre>
+<p>&nbsp;</p>
+<h4>Adjacency list representation in Python</h4>
+<pre><code class='language-python' lang='python'>dedges = [(0,1,10),(0,2,80),(1,2,6),(1,4,20),(2,3,70),(4,5,50),(4,6,5),(5,6,10)]
+size = 7
+WL = {}
+for i in range(size):
+    WL[i] = []
+for (i,j,d) in dedges:
+    WL[i].append((j,d))
+print(WL)
+</code></pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h3>Weighted undirected graph </h3>
+<h4>Adjacency matrix representation in Python</h4>
+<pre><code class='language-python' lang='python'>dedges = [(0,1,10),(0,2,80),(1,2,6),(1,4,20),(2,3,70),(4,5,50),(4,6,5),(5,6,10)]
+# Each edge represented by two entry in data structure ((u,v,d) and (v,u,d) for undirected graph
+edges = dedges + [(j,i,w) for (i,j,w) in dedges]
+size = 7
+import numpy as np
+W = np.zeros(shape=(size,size,2))
+for (i,j,w) in edges:
+    W[i,j,0] = 1
+    W[i,j,1] = w
+print(W)
+</code></pre>
+<p>&nbsp;</p>
+<h4>Adjacency list representation in Python</h4>
+<pre><code class='language-python' lang='python'>dedges = [(0,1,10),(0,2,80),(1,2,6),(1,4,20),(2,3,70),(4,5,50),(4,6,5),(5,6,10)]
+edges = dedges + [(j,i,w) for (i,j,w) in dedges]
+size = 7
+WL = {}
+for i in range(size):
+    WL[i] = []
+for (i,j,d) in edges:
+    WL[i].append((j,d))
+print(WL)
+</code></pre>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<h2 id="Shortest-Path-Algorithms">Shortest Path</h2>
+<h3>Single source shortest path algorithm</h3>
+<p>Find shortest paths from a source vertex to every other vertex.</p>
+<ul>
+<li>Dijkstra&#39;s Algorithm</li>
+<li>Bellman Ford algorithm</li>
+
+</ul>
+<h3 id="Dijkstra-Algorithm">Dijkstra&#39;s Algorithm</h4>
+<p>Dijkstra&#39;s algorithm is a popular algorithm for finding the shortest path between two vertices in a weighted graph. Some of its important properties and points are:</p>
+<ol>
+<li><strong>Single-source shortest path:</strong> Dijkstra&#39;s algorithm finds the shortest path from a single source vertex to all other vertices in the graph.</li>
+<li><strong>Weighted graph:</strong> Dijkstra&#39;s algorithm only works on weighted graphs, where each edge has a weight or cost associated with it.</li>
+<li><strong>Non-negative weights:</strong> Dijkstra&#39;s algorithm can only be used on graphs with non-negative edge weights. If the graph contains negative weights, Bellman-Ford algorithm is a better choice.</li>
+<li><strong>Greedy algorithm:</strong> Dijkstra&#39;s algorithm is a greedy algorithm that selects the vertex with the smallest distance from the starting vertex and explores its neighbors. This process is repeated until the shortest path to all vertices is found.</li>
+<li><strong>Optimal substructure:</strong> Dijkstra&#39;s algorithm relies on the optimal substructure property, which means that the optimal solution to a problem can be obtained by combining the optimal solutions to its subproblems.</li>
+<li><strong>Can handle disconnected graphs:</strong> Dijkstra&#39;s algorithm can handle disconnected graphs, but it will only find the shortest path for the connected component containing the source vertex.</li>
+
+</ol>
+<p>&nbsp;</p>
+<h5>Algorithm Steps</h5>
+<p><strong>Here are the steps for Dijkstra&#39;s algorithm for finding the single source shortest path:</strong></p>
+<ol>
+<li>Create a table to store the distances from the source vertex to each vertex in the graph. Initialize the source vertex with a distance of 0 and all other vertices with infinity. Also create a set of unvisited vertices and mark all vertices as unvisited.</li>
+<li>While the set of unvisited vertices is not empty, do the following:</li>
+<li>Select the unvisited vertex with the smallest distance from the source vertex. This vertex is now considered visited.</li>
+<li>For each neighbor of the visited vertex that is still unvisited, calculate the distance to that neighbor by adding the weight of the edge between the visited vertex and the neighbor to the distance of the visited vertex. If this distance is smaller than the distance currently stored for the neighbor in the table, update the table with the new distance.</li>
+<li>After updating the distances for all neighbors, mark the visited vertex as visited.</li>
+<li>Repeat steps 3 to 5 until all vertices have been visited or the destination vertex has been visited.</li>
+<li>Once the algorithm has visited all vertices, the table will contain the shortest distances from the source vertex to each vertex in the graph.</li>
+<li>To find the shortest path from the source vertex to a destination vertex, backtrack from the destination vertex to the source vertex by following the path with the smallest distance at each step. This will give you the shortest path from the source vertex to the destination vertex.</li>
+
+</ol>
+<p>&nbsp;</p>
+<h5>Working Visualization </h5>
+<p><a href="https://visualgo.net/en/sssp" target="content-frame4" class="btn btn-outline-primary">Open Visualization</a></p>
+<p><strong>Select Dijkstra(s) form left bottom menu</strong></p>
+<figure class="video_container">
+    <iframe name="content-frame4" src="" frameborder="0" width="100%"  height="700px" allowfullscreen="true"> </iframe>
+</figure>
+<p>&nbsp;</p>
+<p><strong>For given graph</strong></p>
+<p><img src="../assets/w5i1.png" width=100% /></p>
+<p>&nbsp;</p>
+<h5>Implementation Dijkstra&#39;s For Adjacency matrix</h5>
+<pre><code class='language-python' lang='python'>def dijkstra(WMat,s):
+    #Initialization
+    (rows,cols,x) = WMat.shape
+    infinity = np.max(WMat)*rows+1
+    (visited,distance) = ({},{})
+    for v in range(rows):
+        (visited[v],distance[v]) = (False,infinity)        
+    distance[s] = 0
+    
+    # Computing shortest distance for each vertex from source
+    for u in range(rows):
+        # Find minimum distance value on vertices which are not visited
+        min_dist = min([distance[v] for v in range(rows) if not visited[v]])
+        
+        # Find vertices which have minimum distance value min_dist
+        nextv_list = [v for v in range(rows)if (not visited[v]) and distance[v] == min_dist]
+        
+        # Select minimum level vertex which have minimum distance value min_dist and mark visited
+        nextv = min(nextv_list)
+        visited[nextv] = True
+        
+        # Check for each adjacent of nextv vertex which is not visited
+        for v in range(cols):            
+            if WMat[nextv,v,0] == 1 and (not visited[v]):
+                #If distance of v through nextv is smaller than the current distance on v, then update
+                if distance[nextv] + WMat[nextv,v,1] &lt; distance[v]:
+                    distance[v] = distance[nextv] + WMat[nextv,v,1]
+    return(distance)
+
+
+
+dedges = [(0,1,10),(0,2,80),(1,2,6),(1,4,20),(2,3,70),(4,5,50),(4,6,5),(5,6,10)]
+size = 7
+import numpy as np
+W = np.zeros(shape=(size,size,2))
+for (i,j,w) in dedges:
+    W[i,j,0] = 1
+    W[i,j,1] = w
+print(dijkstra(W,0))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code class='language-python' lang='python'>{0: 0, 1: 10.0, 2: 16.0, 3: 86.0, 4: 30.0, 5: 80.0, 6: 35.0}
+</code></pre>
+<p><strong>Complexity </strong></p>
+<p> <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="6.348ex" height="2.452ex" role="img" focusable="false" viewBox="0 -833.9 2805.9 1083.9" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.566ex;"><defs><path id="MJX-25-TEX-I-1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path><path id="MJX-25-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-25-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path><path id="MJX-25-TEX-N-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path id="MJX-25-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D442" xlink:href="#MJX-25-TEX-I-1D442"></use></g><g data-mml-node="mo" transform="translate(763,0)"><use data-c="28" xlink:href="#MJX-25-TEX-N-28"></use></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-25-TEX-I-1D449"></use></g><g data-mml-node="mn" transform="translate(861.3,363) scale(0.707)"><use data-c="32" xlink:href="#MJX-25-TEX-N-32"></use></g></g><g data-mml-node="mo" transform="translate(2416.9,0)"><use data-c="29" xlink:href="#MJX-25-TEX-N-29"></use></g></g></g></svg></mjx-container><script type="math/tex">O(V^2 )</script></p>
+<p>&nbsp;</p>
+<h5>Implementation Dijkstra&#39;s For Adjacency List</h5>
+<pre><code class='language-python' lang='python'>def dijkstralist(WList,s):
+    #Initialization
+    infinity = 1 + len(WList.keys())*max([d for u in WList.keys() for (v,d) in WList[u]])
+    (visited,distance) = ({},{})
+    for v in WList.keys():
+        (visited[v],distance[v]) = (False,infinity)        
+    distance[s] = 0
+    
+    # Computing shortest distance for each vertex from source
+    for u in WList.keys():
+        # Find minimum distance value on vertices which are not visited
+        min_dist = min([distance[v] for v in WList.keys() if not visited[v]])
+        
+        # Find vertices which have minimum distance value min_dist
+        nextv_list = [v for v in WList.keys() if (not visited[v]) and distance[v] == min_dist]
+
+        # Select minimum level vertex which have minimum distance value min_dist and mark visited
+        nextv = min(nextv_list)
+        visited[nextv] = True
+        
+        # Check for each adjacent of nextv vertex which is not visited
+        for (v,d) in WList[nextv]:
+            if not visited[v]:
+                # If distance of v through nextv is smaller than the current distance of v, then update
+                if distance[nextv]+d &lt; distance[v]:
+                    distance[v] = distance[nextv]+d
+    return(distance)
+
+
+
+dedges = [(0,1,10),(0,2,80),(1,2,6),(1,4,20),(2,3,70),(4,5,50),(4,6,5),(5,6,10)]
+size = 7
+WL = {}
+for i in range(size):
+    WL[i] = []
+for (i,j,d) in dedges:
+    WL[i].append((j,d))
+print(dijkstralist(WL,0))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code class='language-python' lang='python'>{0: 0, 1: 10, 2: 16, 3: 86, 4: 30, 5: 80, 6: 35}
+</code></pre>
+<p><strong>Code Execution Flow</strong></p>
+<div style =" border-style: double;">
+<iframe width="100%" height="600" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20dijkstralist%28WList,s%29%3A%0A%20%20%20%20%23Initialization%0A%20%20%20%20infinity%20%3D%201%20%2B%20len%28WList.keys%28%29%29*max%28%5Bd%20for%20u%20in%20WList.keys%28%29%20for%20%28v,d%29%20in%20WList%5Bu%5D%5D%29%0A%20%20%20%20%28visited,distance%29%20%3D%20%28%7B%7D,%7B%7D%29%0A%20%20%20%20for%20v%20in%20WList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20%28visited%5Bv%5D,distance%5Bv%5D%29%20%3D%20%28False,infinity%29%20%20%20%20%20%20%20%20%0A%20%20%20%20distance%5Bs%5D%20%3D%200%0A%20%20%20%20%0A%20%20%20%20%23%20Computing%20shortest%20distance%20for%20each%20vertex%20from%20source%0A%20%20%20%20for%20u%20in%20WList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20%23%20Find%20minimum%20distance%20value%20on%20vertices%20which%20are%20not%20visited%0A%20%20%20%20%20%20%20%20min_dist%20%3D%20min%28%5Bdistance%5Bv%5D%20for%20v%20in%20WList.keys%28%29%20if%20not%20visited%5Bv%5D%5D%29%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%23%20Find%20vertices%20which%20have%20minimum%20distance%20value%20min_dist%0A%20%20%20%20%20%20%20%20nextv_list%20%3D%20%5Bv%20for%20v%20in%20WList.keys%28%29%20if%20%28not%20visited%5Bv%5D%29%20and%20distance%5Bv%5D%20%3D%3D%20min_dist%5D%0A%0A%20%20%20%20%20%20%20%20%23%20Select%20minimum%20level%20vertex%20which%20have%20minimum%20distance%20value%20min_dist%20and%20mark%20visited%0A%20%20%20%20%20%20%20%20nextv%20%3D%20min%28nextv_list%29%0A%20%20%20%20%20%20%20%20visited%5Bnextv%5D%20%3D%20True%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%23%20Check%20for%20each%20adjacent%20of%20nextv%20vertex%20which%20is%20not%20visited%0A%20%20%20%20%20%20%20%20for%20%28v,d%29%20in%20WList%5Bnextv%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20not%20visited%5Bv%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20If%20distance%20of%20v%20through%20nextv%20is%20smaller%20than%20the%20current%20distance%20of%20v,%20then%20update%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20distance%5Bnextv%5D%2Bd%20%3C%20distance%5Bv%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20distance%5Bv%5D%20%3D%20distance%5Bnextv%5D%2Bd%0A%20%20%20%20return%28distance%29%0A%0A%0A%0Adedges%20%3D%20%5B%280,1,10%29,%280,2,80%29,%281,2,6%29,%281,4,20%29,%282,3,70%29,%284,5,50%29,%284,6,5%29,%285,6,10%29%5D%0Asize%20%3D%207%0AWL%20%3D%20%7B%7D%0Afor%20i%20in%20range%28size%29%3A%0A%20%20%20%20WL%5Bi%5D%20%3D%20%5B%5D%0Afor%20%28i,j,d%29%20in%20dedges%3A%0A%20%20%20%20WL%5Bi%5D.append%28%28j,d%29%29%0Aprint%28dijkstralist%28WL,0%29%29&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+</div>
+<p>&nbsp;</p>
+<p><strong>Complexity </strong></p>
+<p> <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="6.348ex" height="2.452ex" role="img" focusable="false" viewBox="0 -833.9 2805.9 1083.9" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.566ex;"><defs><path id="MJX-25-TEX-I-1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path><path id="MJX-25-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-25-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path><path id="MJX-25-TEX-N-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path id="MJX-25-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D442" xlink:href="#MJX-25-TEX-I-1D442"></use></g><g data-mml-node="mo" transform="translate(763,0)"><use data-c="28" xlink:href="#MJX-25-TEX-N-28"></use></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-25-TEX-I-1D449"></use></g><g data-mml-node="mn" transform="translate(861.3,363) scale(0.707)"><use data-c="32" xlink:href="#MJX-25-TEX-N-32"></use></g></g><g data-mml-node="mo" transform="translate(2416.9,0)"><use data-c="29" xlink:href="#MJX-25-TEX-N-29"></use></g></g></g></svg></mjx-container><script type="math/tex">O(V^2 )</script></p>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<h3 id="Belleman-Ford-Algorithms">Bellman Ford algorithm</h4>
+<p>Bellman-Ford algorithm is a dynamic programming based algorithm to find the shortest path in a weighted graph, where the edge weights may be negative. Here are some important points and properties of the algorithm:</p>
+<ol>
+<li><strong>It can handle graphs with negative edge weights:</strong> Unlike Dijkstra&#39;s algorithm, which can only handle non-negative edge weights, the Bellman-Ford algorithm can handle graphs with negative edge weights. However, it cannot handle graphs with negative cycles, which are cycles that have a negative sum of edge weights.</li>
+<li><strong>It can detect negative cycles:</strong> The Bellman-Ford algorithm can detect negative cycles in a graph. If there is a negative cycle, the algorithm will report that there is no shortest path from the source vertex to some other vertex.</li>
+<li><strong>It can handle disconnected graphs:</strong> The Bellman-Ford algorithm can handle disconnected graphs by finding the shortest paths from the source vertex to all other vertices in each connected component.</li>
+<li><strong>It uses dynamic programming:</strong> The Bellman-Ford algorithm uses dynamic programming to solve the shortest path problem. It maintains an array of distances that is gradually updated until it converges to the correct values.</li>
+<li>Bellman-Ford works for both directed and undirected graphs with non-negative edges weights.</li>
+
+</ol>
+<p>&nbsp;</p>
+<h5>Algorithm Steps</h5>
+<p>Here are the step-by-step instructions for the Bellman-Ford algorithm:</p>
+<ol>
+<li>Initialize the distance array: Set the distance of the source vertex to 0 and the distances of all other vertices to infinity.</li>
+<li>Relax all edges: Repeat the following step (V-1) times, where V is the number of vertices in the graph. For each edge (u,v) with weight w, if the distance to u plus w is less than the distance to v, update the distance to v to the distance to u plus w.</li>
+<li>Check for negative weight cycles: After relaxing all edges V-1 times, check for negative weight cycles. For each edge (u,v) with weight w, if the distance to u plus w is less than the distance to v, there exists a negative weight cycle.</li>
+<li>Print the distance array: If there are no negative weight cycles, print the distance array, which contains the shortest path distances from the source vertex to all other vertices.</li>
+
+</ol>
+<p>&nbsp;</p>
+<h5>Working Visualization</h5>
+<p><a href="https://visualgo.net/en/sssp" target="content-frame1" class="btn btn-outline-primary">Open Visualization</a></p>
+<p><strong>Select BellmanFord(s) form left bottom menu</strong></p>
+<figure class="video_container">
+    <iframe name="content-frame1" src="" frameborder="0" width="100%"  height="700px" allowfullscreen="true"> </iframe>
+</figure>
+<p><a href='https://visualgo.net/en/sssp' target='_blank' class='url'>https://visualgo.net/en/sssp</a></p>
+<p>&nbsp;</p>
+<p><strong>For given graph</strong></p>
+<p><img src="../assets/w5i2.png" width=100% /></p>
+<h5>Implementation of Bellman Ford for adjacency matrix</h5>
+<pre><code class='language-python' lang='python'>def bellmanford(WMat,s):
+    # Initialization
+    (rows,cols,x) = WMat.shape
+    infinity = np.max(WMat)*rows+1
+    distance = {}
+    for v in range(rows):
+        distance[v] = infinity       
+    distance[s] = 0
+    
+    # Computing shortest distance for each vertex from source
+    # Repeat the process n times where n is number of vertices
+    for i in range(rows):
+        # Check for each adjacent of u vertex
+        for u in range(rows):
+            for v in range(cols):
+                if WMat[u,v,0] == 1:
+                        # If distance of v through u is smaller than the current distance of v, then update
+                    if distance[u] + WMat[u,v,1] &lt; distance[v]:
+                        distance[v] = distance[u] + WMat[u,v,1]
+    return(distance)
+
+
+edges = [(0,1,10),(0,7,8),(1,5,2),(2,1,1),(2,3,1),(3,4,3),(4,5,-1),(5,2,-2),(6,1,-4),(6,5,-1),(7,6,1)]
+size = 8
+import numpy as np
+W = np.zeros(shape=(size,size,2))
+for (i,j,w) in edges:
+    W[i,j,0] = 1
+    W[i,j,1] = w    
+print(bellmanford(W,0))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code class='language-python' lang='python'>{0: 0, 1: 5.0, 2: 5.0, 3: 6.0, 4: 9.0, 5: 7.0, 6: 9.0, 7: 8.0}
+</code></pre>
+<p><strong>Complexity </strong></p>
+<p> <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="6.348ex" height="2.451ex" role="img" focusable="false" viewBox="0 -833.2 2805.9 1083.2" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.566ex;"><defs><path id="MJX-21-TEX-I-1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path><path id="MJX-21-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-21-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path><path id="MJX-21-TEX-N-33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path><path id="MJX-21-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D442" xlink:href="#MJX-21-TEX-I-1D442"></use></g><g data-mml-node="mo" transform="translate(763,0)"><use data-c="28" xlink:href="#MJX-21-TEX-N-28"></use></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-21-TEX-I-1D449"></use></g><g data-mml-node="mn" transform="translate(861.3,363) scale(0.707)"><use data-c="33" xlink:href="#MJX-21-TEX-N-33"></use></g></g><g data-mml-node="mo" transform="translate(2416.9,0)"><use data-c="29" xlink:href="#MJX-21-TEX-N-29"></use></g></g></g></svg></mjx-container><script type="math/tex">O(V^3 )</script> -  where <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.74ex" height="1.595ex" role="img" focusable="false" viewBox="0 -683 769 705" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.05ex;"><defs><path id="MJX-26-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-26-TEX-I-1D449"></use></g></g></g></svg></mjx-container><script type="math/tex">V</script> is number of vertices.</p>
+<p>&nbsp;</p>
+<h5>Implementation of Bellman Ford for adjacency list</h5>
+<pre><code class='language-python' lang='python'>def bellmanfordlist(WList,s):
+    # Initialization
+    infinity = 1 + len(WList.keys())*max([d for u in WList.keys() for (v,d) in WList[u]])
+    distance = {}
+    for v in WList.keys():
+        distance[v] = infinity        
+    distance[s] = 0
+    
+    # Computing shortest distance for each vertex from source
+    # Repeat the process n times where n is number of vertices   
+    for i in WList.keys():
+        # Check for each adjacent of u vertex
+        for u in WList.keys():
+            for (v,d) in WList[u]:
+                # If distance of v through u is smaller than the current distance of v, then update
+                if distance[u] + d &lt; distance[v]:
+                    distance[v] = distance[u] + d
+    return(distance)
+
+
+edges = [(0,1,10),(0,7,8),(1,5,2),(2,1,1),(2,3,1),(3,4,3),(4,5,-1),(5,2,-2),(6,1,-4),(6,5,-1),(7,6,1)]
+size = 8
+WL = {}
+for i in range(size):
+    WL[i] = []
+for (i,j,d) in edges:
+    WL[i].append((j,d))
+print(bellmanfordlist(WL,0))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>{0: 0, 1: 5, 2: 5, 3: 6, 4: 9, 5: 7, 6: 9, 7: 8}
+</code></pre>
+<p>&nbsp;</p>
+<p><strong>Code Execution Flow</strong></p>
+<div style =" border-style: double;">
+<iframe width="100%" height="600" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20bellmanfordlist%28WList,s%29%3A%0A%20%20%20%20%23%20Initialization%0A%20%20%20%20infinity%20%3D%201%20%2B%20len%28WList.keys%28%29%29*max%28%5Bd%20for%20u%20in%20WList.keys%28%29%20for%20%28v,d%29%20in%20WList%5Bu%5D%5D%29%0A%20%20%20%20distance%20%3D%20%7B%7D%0A%20%20%20%20for%20v%20in%20WList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20distance%5Bv%5D%20%3D%20infinity%20%20%20%20%20%20%20%20%0A%20%20%20%20distance%5Bs%5D%20%3D%200%0A%20%20%20%20%0A%20%20%20%20%23%20Computing%20shortest%20distance%20for%20each%20vertex%20from%20source%0A%20%20%20%20%23%20Repeat%20the%20process%20n%20times%20where%20n%20is%20number%20of%20vertices%20%20%20%0A%20%20%20%20for%20i%20in%20WList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20%23%20Check%20for%20each%20adjacent%20of%20u%20vertex%0A%20%20%20%20%20%20%20%20for%20u%20in%20WList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20%28v,d%29%20in%20WList%5Bu%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%23%20If%20distance%20of%20v%20through%20u%20is%20smaller%20than%20the%20current%20distance%20of%20v,%20then%20update%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20distance%5Bu%5D%20%2B%20d%20%3C%20distance%5Bv%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20distance%5Bv%5D%20%3D%20distance%5Bu%5D%20%2B%20d%0A%20%20%20%20return%28distance%29%0A%0A%0Aedges%20%3D%20%5B%280,1,10%29,%280,7,8%29,%281,5,2%29,%282,1,1%29,%282,3,1%29,%283,4,3%29,%284,5,-1%29,%285,2,-2%29,%286,1,-4%29,%286,5,-1%29,%287,6,1%29%5D%0Asize%20%3D%208%0AWL%20%3D%20%7B%7D%0Afor%20i%20in%20range%28size%29%3A%0A%20%20%20%20WL%5Bi%5D%20%3D%20%5B%5D%0Afor%20%28i,j,d%29%20in%20edges%3A%0A%20%20%20%20WL%5Bi%5D.append%28%28j,d%29%29%0Aprint%28bellmanfordlist%28WL,0%29%29&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+</div>
+<p>&nbsp;</p>
+<p><strong>Complexity </strong></p>
+<p> <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="9.092ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 4018.4 1000" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.566ex;"><defs><path id="MJX-18-TEX-I-1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path><path id="MJX-18-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-18-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path><path id="MJX-18-TEX-N-2217" d="M229 286Q216 420 216 436Q216 454 240 464Q241 464 245 464T251 465Q263 464 273 456T283 436Q283 419 277 356T270 286L328 328Q384 369 389 372T399 375Q412 375 423 365T435 338Q435 325 425 315Q420 312 357 282T289 250L355 219L425 184Q434 175 434 161Q434 146 425 136T401 125Q393 125 383 131T328 171L270 213Q283 79 283 63Q283 53 276 44T250 35Q231 35 224 44T216 63Q216 80 222 143T229 213L171 171Q115 130 110 127Q106 124 100 124Q87 124 76 134T64 161Q64 166 64 169T67 175T72 181T81 188T94 195T113 204T138 215T170 230T210 250L74 315Q65 324 65 338Q65 353 74 363T98 374Q106 374 116 368T171 328L229 286Z"></path><path id="MJX-18-TEX-I-1D438" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"></path><path id="MJX-18-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D442" xlink:href="#MJX-18-TEX-I-1D442"></use></g><g data-mml-node="mo" transform="translate(763,0)"><use data-c="28" xlink:href="#MJX-18-TEX-N-28"></use></g><g data-mml-node="mi" transform="translate(1152,0)"><use data-c="1D449" xlink:href="#MJX-18-TEX-I-1D449"></use></g><g data-mml-node="mo" transform="translate(2143.2,0)"><use data-c="2217" xlink:href="#MJX-18-TEX-N-2217"></use></g><g data-mml-node="mi" transform="translate(2865.4,0)"><use data-c="1D438" xlink:href="#MJX-18-TEX-I-1D438"></use></g><g data-mml-node="mo" transform="translate(3629.4,0)"><use data-c="29" xlink:href="#MJX-18-TEX-N-29"></use></g></g></g></svg></mjx-container><script type="math/tex">O(V*E )</script>-  where <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.729ex" height="1.538ex" role="img" focusable="false" viewBox="0 -680 764 680" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: 0px;"><defs><path id="MJX-19-TEX-I-1D438" d="M492 213Q472 213 472 226Q472 230 477 250T482 285Q482 316 461 323T364 330H312Q311 328 277 192T243 52Q243 48 254 48T334 46Q428 46 458 48T518 61Q567 77 599 117T670 248Q680 270 683 272Q690 274 698 274Q718 274 718 261Q613 7 608 2Q605 0 322 0H133Q31 0 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H757Q764 676 764 669Q764 664 751 557T737 447Q735 440 717 440H705Q698 445 698 453L701 476Q704 500 704 528Q704 558 697 578T678 609T643 625T596 632T532 634H485Q397 633 392 631Q388 629 386 622Q385 619 355 499T324 377Q347 376 372 376H398Q464 376 489 391T534 472Q538 488 540 490T557 493Q562 493 565 493T570 492T572 491T574 487T577 483L544 351Q511 218 508 216Q505 213 492 213Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D438" xlink:href="#MJX-19-TEX-I-1D438"></use></g></g></g></svg></mjx-container><script type="math/tex">E</script> is number of edges and <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.74ex" height="1.595ex" role="img" focusable="false" viewBox="0 -683 769 705" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.05ex;"><defs><path id="MJX-26-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-26-TEX-I-1D449"></use></g></g></g></svg></mjx-container><script type="math/tex">V</script> is number of vertices.</p>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<h3 id="Floyd-Warshall-Algorithms">All pair of shortest path</h3>
+<ul>
+<li>Find the shortest paths between every pair of vertices <code>i</code> and <code>j</code>.</li>
+<li>It is equivalent to if run Dijkstra or Bellman-Ford from each vertex.</li>
+
+</ul>
+<h4>Floyd-Warshall algorithm</h4>
+<p>The Floyd-Warshall algorithm is an efficient algorithm for finding the shortest path between all pairs of nodes in a weighted graph. Some important points and properties of the Floyd-Warshall algorithm are:</p>
+<ol>
+<li><strong>All-pairs shortest path:</strong> The Floyd-Warshall algorithm computes the shortest path between all pairs of nodes in the graph.</li>
+<li><strong>Negative cycles:</strong> The Floyd-Warshall algorithm can detect negative cycles in the graph. A negative cycle is a cycle in the graph where the sum of the weights of the edges is negative. If there is a negative cycle in the graph, then the algorithm will report that there is a negative cycle.</li>
+<li><strong>Dynamic programming:</strong> The Floyd-Warshall algorithm uses dynamic programming to compute the shortest path between all pairs of nodes in the graph. The algorithm builds a table of shortest paths between pairs of nodes by iteratively considering intermediate nodes along the path.</li>
+<li><strong>No guarantee of uniqueness:</strong> The shortest path between two nodes in a graph may not be unique. If there are multiple shortest paths between two nodes, then the Floyd-Warshall algorithm may return any one of them.</li>
+<li>Floyd-Warshall&#39;s works for both directed and undirected graphs with non-negative edges weights.</li>
+<li>Floyd-Warshall&#39;s does not work with an undirected graph with negative edges weight, as it will be declared as a negative weight cycle.</li>
+
+</ol>
+<p>&nbsp;</p>
+<h5>Algorithm Steps</h5>
+<p><strong>Here are the steps for the algorithm:</strong></p>
+<ol>
+<li><p>Initialization: Create a 2-dimensional array <code>SP</code> of size <code>n x n</code>, where <code>n</code> is the number of vertices in the graph. For each pair of vertices <code>(i,j)</code>, initialize <code>SP[i][j]</code> to the weight of the edge from vertex <code>i</code> to vertex <code>j</code>. If there is no edge between vertices <code>i</code> and <code>j</code>, then set <code>SP[i][j]</code> to infinity.</p>
+</li>
+<li><p>For each vertex <code>k</code> from <code>1</code> to <code>n</code>, compute the shortest path between every pair of vertices <code>(i,j)</code> that passes through <code>k</code>. To do this, update <code>SP[i][j]</code> as follows:</p>
+<p><code>SP[i][j] = min(SP[i][j], SP[i][k] + SP[k][j])</code></p>
+<p>This means that the shortest path from vertex <code>i</code> to vertex <code>j</code> that passes through <code>k</code> is the minimum of the current shortest path from <code>i</code> to <code>j</code> and the sum of the shortest path from <code>i</code> to <code>k</code> and the shortest path from <code>k</code> to <code>j</code>.</p>
+</li>
+<li><p>After the step 2 is complete, the <code>SP</code> array will contain the shortest path between every pair of vertices in the graph.</p>
+</li>
+
+</ol>
+<p>&nbsp;</p>
+<p><strong>For given input graph</strong></p>
+<p>&nbsp;</p>
+<p><img src="../assets/w5i2.png" width=100% /></p>
+<h5>Implementation of Floyd Warshall Algorithm</h5>
+<pre><code class='language-python' lang='python'>def floydwarshall(WMat):
+    # Initialization
+    (rows,cols,x) = WMat.shape
+    infinity = float(&#39;inf&#39;)  
+    SP = np.zeros(shape=(rows,cols,cols+1))
+    
+        # Filling the initial graph entry in matrix
+    for i in range(rows):
+        for j in range(cols):
+            if WMat[i,j,0] == 1:
+                SP[i,j,0] = WMat[i,j,1]
+            else:
+                SP[i,j,0] = infinity
+    
+    # Repeat the process n times where n is number of vertices
+    for k in range(1,cols+1):
+        # Checking The shortest path distance for each pair in matrix 
+        for i in range(rows):
+            for j in range(cols):
+                SP[i,j,k] = min(SP[i,j,k-1],SP[i,k-1,k-1]+SP[k-1,j,k-1])
+    
+    # Retuen the last updated matrix
+    return(SP[:,:,cols])
+
+
+edges = [(0,1,10),(0,7,8),(1,5,2),(2,1,1),(2,3,1),(3,4,3),(4,5,-1),(5,2,-2),(6,1,-4),(6,5,-1),(7,6,1)]
+size = 8
+import numpy as np
+W = np.zeros(shape=(size,size,2))
+for (i,j,w) in edges:
+    W[i,j,0] = 1
+    W[i,j,1] = w    
+print(floydwarshall(W))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>[[inf  5.  5.  6.  9.  7.  9.  8.]
+    [inf  1.  0.  1.  4.  2. inf inf]
+    [inf  1.  1.  1.  4.  3. inf inf]
+    [inf  1.  0.  1.  3.  2. inf inf]
+    [inf -2. -3. -2.  1. -1. inf inf]
+    [inf -1. -2. -1.  2.  1. inf inf]
+    [inf -4. -4. -3.  0. -2. inf inf]
+    [inf -3. -3. -2.  1. -1.  1. inf]]
+</code></pre>
+<p><strong>Complexity </strong></p>
+<p> <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="6.348ex" height="2.451ex" role="img" focusable="false" viewBox="0 -833.2 2805.9 1083.2" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.566ex;"><defs><path id="MJX-21-TEX-I-1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path><path id="MJX-21-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-21-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path><path id="MJX-21-TEX-N-33" d="M127 463Q100 463 85 480T69 524Q69 579 117 622T233 665Q268 665 277 664Q351 652 390 611T430 522Q430 470 396 421T302 350L299 348Q299 347 308 345T337 336T375 315Q457 262 457 175Q457 96 395 37T238 -22Q158 -22 100 21T42 130Q42 158 60 175T105 193Q133 193 151 175T169 130Q169 119 166 110T159 94T148 82T136 74T126 70T118 67L114 66Q165 21 238 21Q293 21 321 74Q338 107 338 175V195Q338 290 274 322Q259 328 213 329L171 330L168 332Q166 335 166 348Q166 366 174 366Q202 366 232 371Q266 376 294 413T322 525V533Q322 590 287 612Q265 626 240 626Q208 626 181 615T143 592T132 580H135Q138 579 143 578T153 573T165 566T175 555T183 540T186 520Q186 498 172 481T127 463Z"></path><path id="MJX-21-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D442" xlink:href="#MJX-21-TEX-I-1D442"></use></g><g data-mml-node="mo" transform="translate(763,0)"><use data-c="28" xlink:href="#MJX-21-TEX-N-28"></use></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-21-TEX-I-1D449"></use></g><g data-mml-node="mn" transform="translate(861.3,363) scale(0.707)"><use data-c="33" xlink:href="#MJX-21-TEX-N-33"></use></g></g><g data-mml-node="mo" transform="translate(2416.9,0)"><use data-c="29" xlink:href="#MJX-21-TEX-N-29"></use></g></g></g></svg></mjx-container><script type="math/tex">O(V^3 )</script> -  where <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.74ex" height="1.595ex" role="img" focusable="false" viewBox="0 -683 769 705" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.05ex;"><defs><path id="MJX-26-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-26-TEX-I-1D449"></use></g></g></g></svg></mjx-container><script type="math/tex">V</script> is number of vertices.</p>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<h2 id="Minimum-Spanning-Tree">Spanning Tree(ST)</h2>
+<ul>
+<li>Retain a minimal set of edges so that graph remains connected </li>
+<li>Recall that a minimally connected graph is a tree </li>
+<li>Adding an edge to a tree creates a loop </li>
+<li>Removing an edge disconnects the graph </li>
+<li>Want a tree that connects all the vertices — <strong>spanning tree</strong> </li>
+<li>More than one spanning tree, in general</li>
+
+</ul>
+<h3>Minimum Cost Spanning Tree(MCST)</h3>
+<ul>
+<li><p>Add the cost of all the edges in the tree </p>
+</li>
+<li><p>Among the different spanning trees, choose one with minimum cost</p>
+</li>
+<li><p>Some facts about trees</p>
+<ul>
+<li>A tree on n vertices has exactly n − 1 edges</li>
+<li>Adding an edge to a tree must create a cycle.</li>
+<li>In a tree, every pair of vertices is connected by a unique path</li>
+
+</ul>
+</li>
+
+</ul>
+<p><strong>Algorithms:-</strong></p>
+<ul>
+<li>Prim&#39;s Algorithm</li>
+<li>Kruskal&#39;s Algorithm</li>
+
+</ul>
+<p>&nbsp;</p>
+<h3 id="Prims-Algorithm">Prim&#39;s Algorithm</h3>
+<p>Prim&#39;s algorithm is a greedy algorithm that finds a minimum spanning tree (MST) for a weighted undirected graph. Here are some of the key points or properties of Prim&#39;s algorithm:</p>
+<ol>
+<li><strong>Greedy approach:</strong> Prim&#39;s algorithm is a greedy algorithm that works by building up the MST one vertex at a time, always choosing the cheapest edge that connects the growing tree to an outside vertex.</li>
+<li><strong>Works on connected graphs:</strong> Prim&#39;s algorithm only works on connected graphs, meaning that there must be a path between any two vertices in the graph.</li>
+<li><strong>Weighted edges:</strong> Prim&#39;s algorithm requires that the graph have weighted edges. The weights represent the cost or distance of traveling between two vertices.</li>
+<li><strong>Spanning tree:</strong> Prim&#39;s algorithm always produces a spanning tree, which is a subset of the edges that connects all vertices in the graph and contains no cycles.</li>
+<li><strong>Unique solution:</strong> If the weights of the edges are unique, then the MST produced by Prim&#39;s algorithm is unique.</li>
+
+</ol>
+<p>&nbsp;</p>
+<h5>Algorithm Steps</h5>
+<p><strong>Here are the steps for the algorithm:</strong></p>
+<ol>
+<li>Choose any vertex as the starting vertex and add it to the MST set. Initialize the weight of this vertex to 0.</li>
+<li>Find the edge with the minimum weight that connects the starting vertex to any other vertex.</li>
+<li>Add the adjacent vertex connected by the minimum weight edge to the MST set. Set its weight to the weight of the edge.</li>
+<li>Repeat steps 2 and 3 until all vertices are included in the MST set.</li>
+
+</ol>
+<p>&nbsp;</p>
+<h5>Working Visualization</h5>
+<p><a href="https://visualgo.net/en/mst" target="content-frame2" class="btn btn-outline-primary">Open Visualization</a></p>
+<p><strong>Select Prim&#39;s Algorithm from bottom-left menu</strong></p>
+<figure class="video_container">
+    <iframe name="content-frame2" src="" frameborder="0" width="100%"  height="700px" allowfullscreen="true"> </iframe>
+</figure>
+<p>&nbsp;</p>
+<p>Source:- <a href='https://visualgo.net/en/mst' target='_blank' class='url'>https://visualgo.net/en/mst</a></p>
+<p>&nbsp;</p>
+<p><strong>For given input graph</strong></p>
+<p><img src="../assets/w5i3.png" width=100% /></p>
+<h5>Implementation of Prim&#39;s Algorithm</h5>
+<pre><code class='language-python' lang='python'>def primlist(WList):
+    # Initialization
+    infinity = 1 + max([d for u in WList.keys() for (v,d) in WList[u]])
+    (visited,distance,TreeEdges) = ({},{},[])
+    for v in WList.keys():
+        (visited[v],distance[v]) = (False,infinity)
+    
+    # Start from vertex 0, marked visited and update the distance of adjacents from 0
+    visited[0] = True
+    for (v,d) in WList[0]:
+        distance[v] = d
+    
+    # Repeat the below process (number of vertices-1) times
+    for i in range(1,len(WList.keys())):
+        mindist = infinity
+        nextv = None
+        #Finding the minimum weight edge (u,v) where vertex u is visited and v is not visited 
+        for u in WList.keys():
+            for (v,d) in WList[u]:
+                if visited[u] and (not visited[v]) and d &lt; mindist:
+                    mindist = d
+                    nextv = v
+                    nexte = (u,v)
+        
+        # Mark nextv as visited and append the nexte in MST
+        visited[nextv] = True
+        TreeEdges.append(nexte)
+        
+        # Update the distance of unvisited adjacents of nextv if smaller than current
+        for (v,d) in WList[nextv]:
+            if not visited[v]:
+                if d &lt; distance[v]:
+                    distance[v] = d
+    return(TreeEdges)
+
+
+dedges = [(0,1,10),(0,3,18),(1,2,20),(1,3,6),(2,4,8),(3,4,70)]
+edges = dedges + [(j,i,w) for (i,j,w) in dedges]
+size = 5
+WL = {}
+for i in range(size):
+    WL[i] = []
+for (i,j,d) in edges:
+    WL[i].append((j,d))
+print(primlist(WL))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>[(0, 1), (1, 3), (1, 2), (2, 4)]
+</code></pre>
+<p><strong>Output minimum spanning tree with cost 44</strong></p>
+<p><img src="../assets/w5i4.png" width=100% /></p>
+<p><strong>Code Execution Flow</strong></p>
+<div style =" border-style: double;">
+<iframe width="100%" height="600" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20primlist%28WList%29%3A%0A%20%20%20%20%23%20Initialization%0A%20%20%20%20infinity%20%3D%201%20%2B%20max%28%5Bd%20for%20u%20in%20WList.keys%28%29%20for%20%28v,d%29%20in%20WList%5Bu%5D%5D%29%0A%20%20%20%20%28visited,distance,TreeEdges%29%20%3D%20%28%7B%7D,%7B%7D,%5B%5D%29%0A%20%20%20%20for%20v%20in%20WList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20%28visited%5Bv%5D,distance%5Bv%5D%29%20%3D%20%28False,infinity%29%0A%20%20%20%20%0A%20%20%20%20%23%20Start%20from%20vertex%200,%20marked%20visited%20and%20update%20the%20distance%20of%20adjacents%20from%200%0A%20%20%20%20visited%5B0%5D%20%3D%20True%0A%20%20%20%20for%20%28v,d%29%20in%20WList%5B0%5D%3A%0A%20%20%20%20%20%20%20%20distance%5Bv%5D%20%3D%20d%0A%20%20%20%20%0A%20%20%20%20%23%20Repeat%20the%20below%20process%20%28number%20of%20vertices-1%29%20times%0A%20%20%20%20for%20i%20in%20range%281,len%28WList.keys%28%29%29%29%3A%0A%20%20%20%20%20%20%20%20mindist%20%3D%20infinity%0A%20%20%20%20%20%20%20%20nextv%20%3D%20None%0A%20%20%20%20%20%20%20%20%23Finding%20the%20minimum%20weight%20edge%20%28u,v%29%20where%20vertex%20u%20is%20visited%20and%20v%20is%20not%20visited%20%0A%20%20%20%20%20%20%20%20for%20u%20in%20WList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20%28v,d%29%20in%20WList%5Bu%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20visited%5Bu%5D%20and%20%28not%20visited%5Bv%5D%29%20and%20d%20%3C%20mindist%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20mindist%20%3D%20d%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20nextv%20%3D%20v%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20nexte%20%3D%20%28u,v%29%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%23%20Mark%20nextv%20as%20visited%20and%20append%20the%20nexte%20in%20MST%0A%20%20%20%20%20%20%20%20visited%5Bnextv%5D%20%3D%20True%0A%20%20%20%20%20%20%20%20TreeEdges.append%28nexte%29%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%23%20Update%20the%20distance%20of%20unvisited%20adjacents%20of%20nextv%20if%20smaller%20than%20current%0A%20%20%20%20%20%20%20%20for%20%28v,d%29%20in%20WList%5Bnextv%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20not%20visited%5Bv%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20d%20%3C%20distance%5Bv%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20distance%5Bv%5D%20%3D%20d%0A%20%20%20%20return%28TreeEdges%29%0A%0A%0Adedges%20%3D%20%5B%280,1,10%29,%280,3,18%29,%281,2,20%29,%281,3,6%29,%282,4,8%29,%283,4,70%29%5D%0Aedges%20%3D%20dedges%20%2B%20%5B%28j,i,w%29%20for%20%28i,j,w%29%20in%20dedges%5D%0Asize%20%3D%205%0AWL%20%3D%20%7B%7D%0Afor%20i%20in%20range%28size%29%3A%0A%20%20%20%20WL%5Bi%5D%20%3D%20%5B%5D%0Afor%20%28i,j,d%29%20in%20edges%3A%0A%20%20%20%20WL%5Bi%5D.append%28%28j,d%29%29%0Aprint%28primlist%28WL%29%29&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+</div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>Other Implementation</strong></p>
+<pre><code class='language-python' lang='python'>def primlist2(WList):
+    # Initialization
+    infinity = float(&quot;inf&quot;)
+    (visited,distance,nbr) = ({},{},{})
+    for v in WList.keys():
+        (visited[v],distance[v],nbr[v]) = (False,infinity,-1)
+    
+    # Set start vertex distance to 0 
+    distance[0] = 0
+        
+    # Repeat the below process (number of vertices-1) times
+    for i in range(0,len(WList.keys())):
+        # Find minimum distance value on vertices which are not visited
+        min_dist = min([distance[v] for v in WList.keys() if not visited[v]])
+        
+        # Find all vertices that have minimum distance value min_dist and not visited
+        nextv_list = [v for v in WList.keys() if (not visited[v]) and distance[v] == min_dist]
+        
+        # Select the minimum level value vertex from nextv_list ans mark visited
+        nextv = min(nextv_list)      
+        visited[nextv] = True
+        
+        # Update the nbr or parent value for v with minimum eadge distance
+        for (v,d) in WList[nextv]:
+            if not visited[v]:
+                if d &lt; distance[v]:
+                    nbr[v] = nextv
+                    distance[v] = d
+    return(nbr)
+
+
+
+dedges = [(0,1,10),(0,3,18),(1,2,20),(1,3,6),(2,4,8),(3,4,70)]
+edges = dedges + [(j,i,w) for (i,j,w) in dedges]
+size = 5
+WL = {}
+for i in range(size):
+    WL[i] = []
+for (i,j,d) in edges:
+    WL[i].append((j,d))
+print(primlist2(WL))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code class='language-python' lang='python'>{0: -1, 1: 0, 2: 1, 3: 1, 4: 2}
+</code></pre>
+<p>&nbsp;</p>
+<p><strong>Code Execution Flow</strong></p>
+<div style =" border-style: double;">
+<iframe width="100%" height="600" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20primlist2%28WList%29%3A%0A%20%20%20%20%23%20Initialization%0A%20%20%20%20infinity%20%3D%20float%28%22inf%22%29%0A%20%20%20%20%28visited,distance,nbr%29%20%3D%20%28%7B%7D,%7B%7D,%7B%7D%29%0A%20%20%20%20for%20v%20in%20WList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20%28visited%5Bv%5D,distance%5Bv%5D,nbr%5Bv%5D%29%20%3D%20%28False,infinity,-1%29%0A%20%20%20%20%0A%20%20%20%20%23%20Set%20start%20vertex%20distance%20to%200%20%0A%20%20%20%20distance%5B0%5D%20%3D%200%0A%20%20%20%20%20%0A%20%20%20%20%23%20Repeat%20the%20below%20process%20%28number%20of%20vertices-1%29%20times%0A%20%20%20%20for%20i%20in%20range%280,len%28WList.keys%28%29%29%29%3A%0A%20%20%20%20%20%20%20%20%23%20Find%20minimum%20distance%20value%20on%20vertices%20which%20are%20not%20visited%0A%20%20%20%20%20%20%20%20min_dist%20%3D%20min%28%5Bdistance%5Bv%5D%20for%20v%20in%20WList.keys%28%29%20if%20not%20visited%5Bv%5D%5D%29%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%23%20Find%20all%20vertices%20that%20have%20minimum%20distance%20value%20min_dist%20and%20not%20visited%0A%20%20%20%20%20%20%20%20nextv_list%20%3D%20%5Bv%20for%20v%20in%20WList.keys%28%29%20if%20%28not%20visited%5Bv%5D%29%20and%20distance%5Bv%5D%20%3D%3D%20min_dist%5D%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%23%20Select%20the%20minimum%20level%20value%20vertex%20from%20nextv_list%20ans%20mark%20visited%0A%20%20%20%20%20%20%20%20nextv%20%3D%20min%28nextv_list%29%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20visited%5Bnextv%5D%20%3D%20True%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%23%20Update%20the%20nbr%20or%20parent%20value%20for%20v%20with%20minimum%20eadge%20distance%0A%20%20%20%20%20%20%20%20for%20%28v,d%29%20in%20WList%5Bnextv%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20not%20visited%5Bv%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20d%20%3C%20distance%5Bv%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20nbr%5Bv%5D%20%3D%20nextv%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20distance%5Bv%5D%20%3D%20d%0A%20%20%20%20return%28nbr%29%0A%0A%0A%0Adedges%20%3D%20%5B%280,1,10%29,%280,3,18%29,%281,2,20%29,%281,3,6%29,%282,4,8%29,%283,4,70%29%5D%0Aedges%20%3D%20dedges%20%2B%20%5B%28j,i,w%29%20for%20%28i,j,w%29%20in%20dedges%5D%0Asize%20%3D%205%0AWL%20%3D%20%7B%7D%0Afor%20i%20in%20range%28size%29%3A%0A%20%20%20%20WL%5Bi%5D%20%3D%20%5B%5D%0Afor%20%28i,j,d%29%20in%20edges%3A%0A%20%20%20%20WL%5Bi%5D.append%28%28j,d%29%29%0Aprint%28primlist2%28WL%29%29&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+</div>
+<p>&nbsp;</p>
+<p><strong>Complexity </strong></p>
+<p> <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="6.348ex" height="2.452ex" role="img" focusable="false" viewBox="0 -833.9 2805.9 1083.9" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.566ex;"><defs><path id="MJX-25-TEX-I-1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path><path id="MJX-25-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-25-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path><path id="MJX-25-TEX-N-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path id="MJX-25-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D442" xlink:href="#MJX-25-TEX-I-1D442"></use></g><g data-mml-node="mo" transform="translate(763,0)"><use data-c="28" xlink:href="#MJX-25-TEX-N-28"></use></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-25-TEX-I-1D449"></use></g><g data-mml-node="mn" transform="translate(861.3,363) scale(0.707)"><use data-c="32" xlink:href="#MJX-25-TEX-N-32"></use></g></g><g data-mml-node="mo" transform="translate(2416.9,0)"><use data-c="29" xlink:href="#MJX-25-TEX-N-29"></use></g></g></g></svg></mjx-container><script type="math/tex">O(V^2 )</script> -  where <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.74ex" height="1.595ex" role="img" focusable="false" viewBox="0 -683 769 705" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.05ex;"><defs><path id="MJX-26-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-26-TEX-I-1D449"></use></g></g></g></svg></mjx-container><script type="math/tex">V</script> is number of vertices.</p>
+<p>&nbsp;</p>
+<hr />
+<p>&nbsp;</p>
+<h3 id="Kruskal-Algorithms">Kruskal&#39;s Algorithm</h3>
+<p>Kruskal&#39;s algorithm is a greedy algorithm used to find the minimum spanning tree (MST) of a connected, undirected graph. The algorithm works by iteratively adding the edges of the graph with the smallest weights that do not create a cycle in the MST. Here are some important points and properties of Kruskal&#39;s algorithm:</p>
+<ol>
+<li>Kruskal&#39;s algorithm is a greedy algorithm used to find the minimum spanning tree (MST) of a connected, undirected graph.</li>
+<li>The algorithm works by iteratively adding the edges of the graph with the smallest weights that do not create a cycle in the MST.</li>
+<li>Kruskal&#39;s algorithm guarantees that the MST is unique if the graph has unique edge weights.</li>
+
+</ol>
+<p>&nbsp;</p>
+<h5>Algorithm Steps</h5>
+<p><strong>Here are the steps for the of Kruskal&#39;s algorithm:</strong></p>
+<ol>
+<li>Sort all the edges of the graph in non-decreasing order of their weights.</li>
+<li>Create a new empty set for the minimum spanning tree (MST).</li>
+<li>Iterate through the sorted edges, starting with the edge with the smallest weight.</li>
+<li>For each edge, check if adding it to the MST will create a cycle. </li>
+<li>If the edge does not create a cycle, add it to the MST.</li>
+<li>Repeat steps 4 and 5 until all vertices are included in the MST, or until the desired number of edges have been added.</li>
+<li>Return the MST.</li>
+
+</ol>
+<p>&nbsp;</p>
+<h5>Working Visualization</h5>
+<p><a href="https://visualgo.net/en/mst" target="content-frame3" class="btn btn-outline-primary">Open Visualization</a></p>
+<p><strong>Select Kruskal&#39;s Algorithm from bottom-left menu</strong></p>
+<figure class="video_container">
+    <iframe name="content-frame3" src="" frameborder="0" width="100%"  height="700px" allowfullscreen="true"> </iframe>
+</figure>
+<p>&nbsp;</p>
+<p>Source:- <a href='https://visualgo.net/en/mst' target='_blank' class='url'>https://visualgo.net/en/mst</a></p>
+<p><strong>For given input graph</strong></p>
+<p><img src="../assets/w5i5.png" width=100% /></p>
+<h5>Implementation of Kruskal&#39;s Algorithm</h5>
+<pre><code class='language-python' lang='python'>def kruskal(WList):
+    # Initialization
+    (edges,component,TE) = ([],{},[])
+    for u in WList.keys():
+        # Weight as first value in tuple to sort easily
+        edges.extend([(d,u,v) for (v,d) in WList[u]])
+        # Initially each vertex as single components and assign leader of each component 
+        component[u] = u
+    
+    # Sort the edges in increasing order of their weights
+    edges.sort()
+    
+    for (d,u,v) in edges:
+        # If (u,v) edge is not creating the cycle in MST, add the edge in MST
+        if component[u] != component[v]:
+            TE.append((u,v))
+            c = component[u]
+            # Update of component leader 
+            for w in WList.keys():
+                if component[w] == c:
+                    component[w] = component[v]
+    return(TE)
+
+
+dedges = [(0,1,10),(0,2,18),(1,2,6),(1,4,20),(2,3,70),(4,5,10),(4,6,10),(5,6,5)]
+edges = dedges + [(j,i,w) for (i,j,w) in dedges]
+size = 7
+WL = {}
+for i in range(size):
+    WL[i] = []
+for (i,j,d) in edges:
+    WL[i].append((j,d))
+print(kruskal(WL))
+</code></pre>
+<p><strong>Output</strong></p>
+<pre><code>[(5, 6), (1, 2), (0, 1), (4, 5), (1, 4), (2, 3)]
+</code></pre>
+<p><strong>Output minimum spanning tree with cost 121</strong></p>
+<p><img src="../assets/w5i6.png" width=100% /></p>
+<p><strong>Code Execution Flow</strong></p>
+<div style =" border-style: double;">
+<iframe width="100%" height="600" frameborder="0" src="https://pythontutor.com/iframe-embed.html#code=def%20kruskal%28WList%29%3A%0A%20%20%20%20%23%20Initialization%0A%20%20%20%20%28edges,component,TE%29%20%3D%20%28%5B%5D,%7B%7D,%5B%5D%29%0A%20%20%20%20for%20u%20in%20WList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20%23%20Weight%20as%20first%20value%20in%20tuple%20to%20sort%20easily%0A%20%20%20%20%20%20%20%20edges.extend%28%5B%28d,u,v%29%20for%20%28v,d%29%20in%20WList%5Bu%5D%5D%29%0A%20%20%20%20%20%20%20%20%23%20Initially%20each%20vertex%20as%20single%20components%20and%20assign%20leader%20of%20each%20component%20%0A%20%20%20%20%20%20%20%20component%5Bu%5D%20%3D%20u%0A%20%20%20%20%0A%20%20%20%20%23%20Sort%20the%20edges%20in%20increasing%20order%20of%20their%20weights%0A%20%20%20%20edges.sort%28%29%0A%20%20%20%0A%20%20%20%20for%20%28d,u,v%29%20in%20edges%3A%0A%20%20%20%20%20%20%20%20%23%20If%20%28u,v%29%20edge%20is%20not%20creating%20the%20cycle%20in%20MST,%20add%20the%20edge%20in%20MST%0A%20%20%20%20%20%20%20%20if%20component%5Bu%5D%20!%3D%20component%5Bv%5D%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20TE.append%28%28u,v%29%29%0A%20%20%20%20%20%20%20%20%20%20%20%20c%20%3D%20component%5Bu%5D%0A%20%20%20%20%20%20%20%20%20%20%20%20%23%20Update%20of%20component%20leader%20%0A%20%20%20%20%20%20%20%20%20%20%20%20for%20w%20in%20WList.keys%28%29%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20if%20component%5Bw%5D%20%3D%3D%20c%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20component%5Bw%5D%20%3D%20component%5Bv%5D%0A%20%20%20%20return%28TE%29%0A%0A%0Adedges%20%3D%20%5B%280,1,10%29,%280,2,18%29,%281,2,6%29,%281,4,20%29,%282,3,70%29,%284,5,10%29,%284,6,10%29,%285,6,5%29%5D%0Aedges%20%3D%20dedges%20%2B%20%5B%28j,i,w%29%20for%20%28i,j,w%29%20in%20dedges%5D%0Asize%20%3D%207%0AWL%20%3D%20%7B%7D%0Afor%20i%20in%20range%28size%29%3A%0A%20%20%20%20WL%5Bi%5D%20%3D%20%5B%5D%0Afor%20%28i,j,d%29%20in%20edges%3A%0A%20%20%20%20WL%5Bi%5D.append%28%28j,d%29%29%0Aprint%28kruskal%28WL%29%29&codeDivHeight=400&codeDivWidth=350&cumulative=false&curInstr=0&heapPrimitives=nevernest&origin=opt-frontend.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false"> </iframe>
+</div>
+<p>&nbsp;</p>
+<p><strong>Complexity </strong></p>
+<p> <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="6.348ex" height="2.452ex" role="img" focusable="false" viewBox="0 -833.9 2805.9 1083.9" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.566ex;"><defs><path id="MJX-25-TEX-I-1D442" d="M740 435Q740 320 676 213T511 42T304 -22Q207 -22 138 35T51 201Q50 209 50 244Q50 346 98 438T227 601Q351 704 476 704Q514 704 524 703Q621 689 680 617T740 435ZM637 476Q637 565 591 615T476 665Q396 665 322 605Q242 542 200 428T157 216Q157 126 200 73T314 19Q404 19 485 98T608 313Q637 408 637 476Z"></path><path id="MJX-25-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-25-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path><path id="MJX-25-TEX-N-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path id="MJX-25-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D442" xlink:href="#MJX-25-TEX-I-1D442"></use></g><g data-mml-node="mo" transform="translate(763,0)"><use data-c="28" xlink:href="#MJX-25-TEX-N-28"></use></g><g data-mml-node="msup" transform="translate(1152,0)"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-25-TEX-I-1D449"></use></g><g data-mml-node="mn" transform="translate(861.3,363) scale(0.707)"><use data-c="32" xlink:href="#MJX-25-TEX-N-32"></use></g></g><g data-mml-node="mo" transform="translate(2416.9,0)"><use data-c="29" xlink:href="#MJX-25-TEX-N-29"></use></g></g></g></svg></mjx-container><script type="math/tex">O(V^2 )</script> -  where <mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.74ex" height="1.595ex" role="img" focusable="false" viewBox="0 -683 769 705" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.05ex;"><defs><path id="MJX-26-TEX-I-1D449" d="M52 648Q52 670 65 683H76Q118 680 181 680Q299 680 320 683H330Q336 677 336 674T334 656Q329 641 325 637H304Q282 635 274 635Q245 630 242 620Q242 618 271 369T301 118L374 235Q447 352 520 471T595 594Q599 601 599 609Q599 633 555 637Q537 637 537 648Q537 649 539 661Q542 675 545 679T558 683Q560 683 570 683T604 682T668 681Q737 681 755 683H762Q769 676 769 672Q769 655 760 640Q757 637 743 637Q730 636 719 635T698 630T682 623T670 615T660 608T652 599T645 592L452 282Q272 -9 266 -16Q263 -18 259 -21L241 -22H234Q216 -22 216 -15Q213 -9 177 305Q139 623 138 626Q133 637 76 637H59Q52 642 52 648Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D449" xlink:href="#MJX-26-TEX-I-1D449"></use></g></g></g></svg></mjx-container><script type="math/tex">V</script> is number of vertices.</p>
+
+
+
+
+
+        
+
+</div>
+    <div class="col-lg-3 collapse right-menu d-lg-block" id="rightMenuCollapse" >
+        <h2>Topics</h2>
+        <ul>
+            <li><a href="#Weighted-Graph">Weighted Graph</a></li>
+            <li><a href="#Shortest-Path-Algorithms">Shortest Path Algorithms</a></li>
+            <li><a href="#Dijkstra-Algorithm">Dijkstra's Algorithm</a></li>
+            <li><a href="#Belleman-Ford-Algorithms">Belleman Ford Algorithms</a></li>
+            <li><a href="#Floyd-Warshall-Algorithms">Floyd-Warshall Algorithms</a></li>
+            <li><a href="#Minimum-Spanning-Tree">Minimum Spanning Tree</a></li>
+            <li><a href="#Prims-Algorithm">Prims's Algorithm</a></li>
+            <li><a href="#Kruskal-Algorithms">Kruskal's Algorithms</a></li>
+
+        </ul>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Prism.js JS for Syntax Highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</body>
+
+</html>
