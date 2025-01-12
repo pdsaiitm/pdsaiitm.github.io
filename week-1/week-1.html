@@ -208,7 +208,7 @@ print(s)
 	(a,b) = (max(m,n), min(m,n))
 	if a%b == 0:
 		return(b)
-	else
+	else:
 		return(gcd(b,a-b))
 </code></pre>
 <p>Still not efficient, for example <code>gcd(1,1000)</code> takes 1000 steps.</p>
